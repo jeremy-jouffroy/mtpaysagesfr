@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+---
+<Base title="Avis clients" description={`Les avis de nos clients sur ${site.name}, jardinier paysagiste à ${site.address.city}.`}>
+  <PageHero title="Avis de nos clients" lead={site.googleRating ? `Note moyenne de ${site.googleRating.value}/5 sur ${site.googleRating.count} avis Google.` : 'Ce que nos clients disent de notre travail.'} />
+  <section class="section">
+    <div class="container">
+      <Reviews count={6} />
+      <div class="card" style="margin-top:2.5rem"><div class="card-body">
+        <h3>Vous êtes client ?</h3>
+        <p class="muted">Votre avis nous aide beaucoup. Il ne prend qu’une minute sur Google.</p>
+        <p><a class="btn btn--primary" href={site.googleReviewsUrl} target="_blank" rel="noopener">Laisser un avis sur Google</a></p>
+      </div></div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

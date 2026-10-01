@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import TaxCreditBox from '../components/TaxCreditBox.astro';
+import { site } from '../config/site';
+import { telHref } from '../scripts/utils';
+---
+<Base title="Demander un devis gratuit" description={`Demandez votre devis gratuit d'entretien ou d'aménagement de jardin à ${site.address.city}. Réponse sous 48 h.`}>
+  <PageHero title="Demander un devis gratuit" lead="Décrivez votre besoin en 2 minutes. Nous vous recontactons sous 48 h ouvrées pour convenir d’une visite gratuite." />
+  <section class="section">
+    <div class="container layout-aside">
+      <div class="form-card">
+        <QuoteForm />
+      </div>
+      <aside class="aside-sticky">
+        <div class="card"><div class="card-body">
+          <h3>Vous préférez appeler ?</h3>
+          <p><a class="btn btn--outline" href={telHref(site.phone)}>📞 {site.phone}</a></p>
+          <p class="small muted">{site.hours}</p>
+        </div></div>
+        <TaxCreditBox />
+        <ul class="checklist small">
+          <li>Visite et devis gratuits</li>
+          <li>Sans engagement</li>
+          <li>Vos données ne sont jamais revendues</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>

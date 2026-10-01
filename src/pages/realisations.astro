@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { ph } from '../scripts/utils';
+
+// TODO : remplacer par de vrais chantiers. Une photo avant/après (côte à côte) par projet fonctionne le mieux.
+const projects = [
+  { cat: 'entretien', title: 'Taille d’une haie de laurier de 40 m', place: '[Commune]', img: 'AVANT / APRÈS\nHaie de laurier 40 m' },
+  { cat: 'entretien', title: 'Remise en état d’un jardin abandonné', place: '[Commune]', img: 'AVANT / APRÈS\nJardin en friche remis en état' },
+  { cat: 'entretien', title: 'Nettoyage d’automne', place: '[Commune]', img: 'AVANT / APRÈS\nPelouse couverte de feuilles' },
+  { cat: 'creation', title: 'Création d’un massif de vivaces', place: '[Commune]', img: 'AVANT / APRÈS\nMassif de vivaces' },
+  { cat: 'creation', title: 'Terrasse bois et pas japonais', place: '[Commune]', img: 'AVANT / APRÈS\nTerrasse en bois' },
+  { cat: 'creation', title: 'Engazonnement d’un terrain neuf', place: '[Commune]', img: 'AVANT / APRÈS\nTerrain nu → pelouse' },
+  { cat: 'creation', title: 'Clôture brise-vue et haie champêtre', place: '[Commune]', img: 'AVANT / APRÈS\nClôture et haie' },
+  { cat: 'elagage', title: 'Abattage d’un pin par démontage', place: '[Commune]', img: 'Abattage d’un pin\npar démontage' },
+  { cat: 'entretien', title: 'Débroussaillage d’un terrain de 2 000 m²', place: '[Commune]', img: 'AVANT / APRÈS\nDébroussaillage 2 000 m²' },
+];
+const filters = [
+  { key: 'all', label: 'Tout' },
+  { key: 'entretien', label: 'Entretien' },
+  { key: 'creation', label: 'Création' },
+  { key: 'elagage', label: 'Élagage' },
+];
+---
+<Base title="Nos réalisations" description="Découvrez nos chantiers d'entretien et de création de jardins en photos avant / après.">
+  <PageHero title="Nos réalisations" lead="Quelques jardins que nous avons entretenus, transformés ou créés. Chaque projet est photographié avant et après notre passage." />
+  <section class="section">
+    <div class="container">
+      <div class="filters" role="group" aria-label="Filtrer les réalisations">
+        {filters.map((f, i) => <button type="button" data-filter={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>{f.label}</button>)}
+      </div>
+      <div class="gallery" id="gallery">
+        {projects.map((p) => (
+          <figure data-cat={p.cat}>
+            <img src={ph(p.img, 600, 450)} alt={p.title} loading="lazy" width="600" height="450" />
+            <figcaption><strong>{p.title}</strong> · {p.place}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Envie du même résultat chez vous ?" />
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const items = document.querySelectorAll<HTMLElement>('#gallery figure');
+  buttons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      items.forEach((it) => (it.hidden = f !== 'all' && it.dataset.cat !== f));
+    }),
+  );
+</script>

@@ -1,0 +1,18 @@
+---
+import type { Service } from '../data/services';
+import { site } from '../config/site';
+import { url, ph } from '../scripts/utils';
+
+interface Props { service: Service }
+const { service: s } = Astro.props;
+const base = s.category === 'entretien' ? 'entretien-jardin' : 'creation-amenagement';
+---
+<a class="card" href={url(`${base}/${s.slug}/`)}>
+  <img src={ph(s.images[0], 600, 400)} alt={s.images[0].replace(/\n/g, ' ')} width="600" height="400" loading="lazy" />
+  <div class="card-body">
+    <h3>{s.title}</h3>
+    <p class="muted small">{s.intro.split('. ')[0]}.</p>
+    {s.sapEligible && site.sap.enabled && <p><span class="badge badge--soft">-50 % crédit d’impôt</span></p>}
+    <span class="more">En savoir plus →</span>
+  </div>
+</a>

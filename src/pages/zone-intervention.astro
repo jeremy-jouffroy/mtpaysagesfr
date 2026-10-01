@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+import { url, ph, slugify } from '../scripts/utils';
+---
+<Base title={`Zone d’intervention : ${site.address.city} et alentours`} description={`MT Paysage intervient à ${site.address.city} et dans un rayon de ${site.radiusKm} km : ${site.communes.slice(0, 6).join(', ')}…`}>
+  <PageHero title="Zone d’intervention" lead={`Nous intervenons à ${site.address.city} et dans toutes les communes situées à environ ${site.radiusKm} km.`} />
+  <section class="section">
+    <div class="container grid grid-2">
+      <div>
+        <h2>Communes desservies</h2>
+        <ul class="communes">
+          {site.communes.map((c) => <li>📍 {c}</li>)}
+        </ul>
+        <h3 style="margin-top:2rem">Pages par commune</h3>
+        <ul>
+          {site.cityPages.map((c) => <li><a href={url(`jardinier-${slugify(c.name)}/`)}>Jardinier paysagiste à {c.name}</a></li>)}
+        </ul>
+        <p class="muted">Votre commune n’est pas dans la liste ? <a href={url('contact/')}>Contactez-nous</a> : nous étudions chaque demande.</p>
+      </div>
+      <!-- TODO : remplacer par une carte (capture d'écran OpenStreetMap ou carte dessinée). Éviter l'iframe Google Maps, qui dépose des cookies. -->
+      <img src={ph(`Carte : rayon de ${site.radiusKm} km\nautour de ${site.address.city}`, 700, 600)} alt="Carte de la zone d'intervention" width="700" height="600" style="border-radius:var(--radius)" />
+    </div>
+  </section>
+  <CtaBand />
+</Base>

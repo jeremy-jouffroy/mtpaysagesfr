@@ -1,0 +1,178 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import { site } from '../config/site';
+import { byCategory } from '../data/services';
+import { url, ph, telHref } from '../scripts/utils';
+
+const faq = [
+  {
+    q: 'Le devis est-il gratuit ?',
+    a: 'Oui. Nous passons voir votre jardin, sans frais ni engagement, puis vous envoyons un devis détaillé sous 48 h.',
+  },
+  {
+    q: 'Quelles prestations ouvrent droit au crédit d’impôt ?',
+    a: 'Les petits travaux de jardinage : tonte, taille de haies et d’arbustes, désherbage, ramassage des feuilles, débroussaillage. La création d’un jardin, les terrasses ou les clôtures n’y ouvrent pas droit.',
+  },
+  {
+    q: 'Dans quelles communes intervenez-vous ?',
+    a: `À ${site.address.city} et dans un rayon d’environ ${site.radiusKm} km : ${site.communes.slice(0, 5).join(', ')}…`,
+  },
+  {
+    q: 'Évacuez-vous les déchets verts ?',
+    a: 'Oui, l’évacuation est comprise dans nos interventions. Si vous le souhaitez, nous pouvons aussi broyer les branchages pour pailler vos massifs.',
+  },
+];
+---
+<Base title={`${site.name} – Jardinier paysagiste à ${site.address.city}`} faq={faq} image={ph('Jardin entretenu\npar MT Paysage', 1200, 630)}>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        {site.sap.enabled && <p><span class="badge">-50 % de crédit d’impôt sur l’entretien</span></p>}
+        <h1>Jardinier paysagiste à {site.address.city} et alentours</h1>
+        <p class="lead">
+          Entretien régulier, taille de haies, création de massifs ou de terrasses : nous prenons soin de votre jardin
+          toute l’année, avec des méthodes respectueuses de l’environnement.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={url('devis/')}>Demander un devis gratuit</a>
+          <a class="btn btn--outline" href={telHref(site.phone)}>📞 {site.phone}</a>
+        </div>
+        <ul class="hero-points">
+          <li>Devis gratuit sous 48 h</li>
+          <li>Évacuation des déchets verts incluse</li>
+          <li>Zéro pesticide</li>
+        </ul>
+      </div>
+      <img class="hero-img" src={ph('Photo principale :\njardin entretenu par MT Paysage', 900, 700)} alt="Jardin entretenu par MT Paysage" width="900" height="700" />
+    </div>
+  </section>
+
+  <!-- DEUX MÉTIERS -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Nos services</span>
+        <h2>Entretenir ou transformer votre jardin</h2>
+      </div>
+      <div class="grid grid-2">
+        <a class="card" href={url('entretien-jardin/')}>
+          <img src={ph('Jardinier taillant une haie', 800, 450)} alt="Taille de haie" width="800" height="450" loading="lazy" />
+          <div class="card-body card-big">
+            {site.sap.enabled && <p><span class="badge">-50 % crédit d’impôt</span></p>}
+            <h3>Entretien de jardin</h3>
+            <p class="muted">Tonte, taille de haies, désherbage, ramassage des feuilles et débroussaillage, ponctuellement ou par contrat annuel.</p>
+            <ul class="checklist small">
+              {byCategory('entretien').map((s) => <li>{s.title}</li>)}
+            </ul>
+            <span class="more">Découvrir l’entretien →</span>
+          </div>
+        </a>
+        <a class="card" href={url('creation-amenagement/')}>
+          <img src={ph('Terrasse bois et massifs\nnouvellement créés', 800, 450)} alt="Aménagement paysager" width="800" height="450" loading="lazy" />
+          <div class="card-body card-big">
+            <p><span class="badge badge--soft">Conception sur mesure</span></p>
+            <h3>Création et aménagement</h3>
+            <p class="muted">Massifs, pelouses, terrasses, allées, clôtures et arrosage automatique : nous concevons et réalisons le jardin qui vous ressemble.</p>
+            <ul class="checklist small">
+              {byCategory('creation').map((s) => <li>{s.title}</li>)}
+            </ul>
+            <span class="more">Découvrir la création →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIFFRES CLÉS -->
+  <section class="section section--green">
+    <div class="container stats">
+      <div class="stat"><strong>{site.yearsExperience} ans</strong><span>d’expérience</span></div>
+      <div class="stat"><strong>[XXX]</strong><span>jardins entretenus</span></div>
+      <div class="stat"><strong>{site.googleRating ? `${site.googleRating.value}/5` : '[4,9/5]'}</strong><span>sur Google</span></div>
+      <div class="stat"><strong>48 h</strong><span>pour recevoir votre devis</span></div>
+    </div>
+  </section>
+
+  <!-- RÉALISATIONS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Réalisations</span>
+        <h2>Quelques jardins avant / après</h2>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img src={ph('AVANT / APRÈS\nHaie de 40 m remise en forme', 600, 450)} alt="Avant / après taille de haie" loading="lazy" width="600" height="450" />
+          <figcaption>Taille d’une haie de 40 m · [Commune]</figcaption>
+        </figure>
+        <figure>
+          <img src={ph('AVANT / APRÈS\nCréation d’un massif\net d’une allée', 600, 450)} alt="Avant / après création de massif" loading="lazy" width="600" height="450" />
+          <figcaption>Massif et allée en pas japonais · [Commune]</figcaption>
+        </figure>
+        <figure>
+          <img src={ph('AVANT / APRÈS\nTerrain débroussaillé', 600, 450)} alt="Avant / après débroussaillage" loading="lazy" width="600" height="450" />
+          <figcaption>Remise en état d’un terrain · [Commune]</figcaption>
+        </figure>
+      </div>
+      <p style="margin-top:1.5rem"><a class="btn btn--outline" href={url('realisations/')}>Voir toutes nos réalisations</a></p>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Simple et rapide</span>
+        <h2>Comment ça marche ?</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Vous nous contactez</h3><p class="muted small">Par le formulaire, par téléphone ou par email, en décrivant votre besoin.</p></li>
+        <li><h3>Visite gratuite</h3><p class="muted small">Nous passons voir votre jardin pour évaluer précisément le travail.</p></li>
+        <li><h3>Devis sous 48 h</h3><p class="muted small">Un devis clair et détaillé, avec le montant après crédit d’impôt.</p></li>
+        <li><h3>Intervention</h3><p class="muted small">Nous intervenons à la date convenue et laissons votre jardin propre.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Avis clients</span>
+        <h2>Ils nous confient leur jardin</h2>
+      </div>
+      <Reviews />
+    </div>
+  </section>
+
+  <!-- ZONE -->
+  <section class="section section--alt">
+    <div class="container grid grid-2" style="align-items:center">
+      <div>
+        <span class="eyebrow">Zone d’intervention</span>
+        <h2>À {site.address.city} et dans un rayon de {site.radiusKm} km</h2>
+        <ul class="communes">
+          {site.communes.map((c) => <li>📍 {c}</li>)}
+        </ul>
+        <a href={url('zone-intervention/')}>Voir toute la zone d’intervention →</a>
+      </div>
+      <img src={ph(`Carte de la zone\nautour de ${site.address.city}`, 700, 500)} alt="Carte de la zone d’intervention" loading="lazy" width="700" height="500" style="border-radius:var(--radius)" />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <div class="section-head center">
+        <h2>Questions fréquentes</h2>
+      </div>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

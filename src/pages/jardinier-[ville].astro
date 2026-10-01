@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+import { services } from '../data/services';
+import { ph, slugify } from '../scripts/utils';
+
+export function getStaticPaths() {
+  return site.cityPages.map((city) => ({ params: { ville: slugify(city.name) }, props: { city } }));
+}
+const { city } = Astro.props as { city: (typeof site.cityPages)[number] };
+---
+<Base
+  title={`Jardinier paysagiste à ${city.name}`}
+  description={`Jardinier paysagiste à ${city.name} : entretien de jardin, taille de haies, création d'espaces verts. ${site.sap.enabled ? "50 % de crédit d'impôt. " : ''}Devis gratuit.`}
+>
+  <PageHero title={`Jardinier paysagiste à ${city.name}`} lead={city.intro} crumbs={[{ label: 'Zone d’intervention', href: 'zone-intervention/' }]}>
+    {site.sap.enabled && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <h2>Nos chantiers à {city.name}</h2>
+      <p class="placeholder-note">TODO : ajouter 2 ou 3 chantiers réels réalisés dans cette commune. C’est ce qui rend la page utile et lui permet d’être bien référencée.</p>
+      <div class="gallery" style="margin-top:1.5rem">
+        <figure><img src={ph(`Chantier à ${city.name} n° 1`, 600, 450)} alt={`Chantier à ${city.name}`} loading="lazy" width="600" height="450" /></figure>
+        <figure><img src={ph(`Chantier à ${city.name} n° 2`, 600, 450)} alt={`Chantier à ${city.name}`} loading="lazy" width="600" height="450" /></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2>Nos services à {city.name}</h2>
+      <div class="grid grid-3">
+        {services.filter((s) => s.category === 'entretien').slice(0, 3).map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Avis de clients à {city.name}</h2>
+      <Reviews count={2} />
+    </div>
+  </section>
+
+  <CtaBand title={`Un jardin à entretenir à ${city.name} ?`} />
+</Base>

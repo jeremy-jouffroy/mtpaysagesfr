@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+import { url } from '../scripts/utils';
+
+const faq = [
+  { q: 'Je ne paie pas d’impôt sur le revenu, suis-je concerné ?', a: 'Oui. C’est un crédit d’impôt et non une réduction : si vous n’êtes pas imposable, l’administration vous rembourse le montant.' },
+  { q: 'Quels travaux sont éligibles ?', a: 'Les « petits travaux de jardinage » des particuliers : tonte, taille de haies et d’arbustes, désherbage, ramassage des feuilles, débroussaillage et évacuation des déchets correspondants. La création de jardin, la pose de terrasses ou de clôtures et l’abattage d’arbres ne sont pas éligibles.' },
+  { q: 'Quel est le plafond ?', a: '5 000 € de dépenses par an et par foyer fiscal pour le jardinage, soit au maximum 2 500 € de crédit d’impôt.' },
+  { q: 'Le jardin doit-il être celui de ma résidence principale ?', a: 'Non. Le jardin doit être attenant à votre résidence, principale ou secondaire, située en France.' },
+  { q: 'Quels documents vais-je recevoir ?', a: 'Une facture pour chaque prestation et, en début d’année, une attestation fiscale récapitulant les sommes versées l’année précédente, à reporter dans votre déclaration de revenus.' },
+];
+---
+<Base title="Crédit d’impôt de 50 % sur l’entretien de jardin" description="Comment bénéficier de 50 % de crédit d'impôt sur l'entretien de votre jardin : travaux éligibles, plafond, avance immédiate et exemple chiffré." faq={faq}>
+  <PageHero title="50 % de crédit d’impôt sur l’entretien de votre jardin" lead="L’entretien de jardin fait partie des services à la personne : la moitié de ce que vous dépensez vous est rendue, que vous soyez imposable ou non." />
+
+  <section class="section">
+    <div class="container prose">
+      {!site.sap.enabled && (
+        <p class="placeholder-note">⚠️ Cette page ne doit être publiée que si l’entreprise est déclarée « Services à la personne ».</p>
+      )}
+
+      <h2>Exemple concret</h2>
+      <div class="tax-box">
+        <div class="calc">
+          <span>Contrat d’entretien annuel</span><strong>1 200 €</strong>
+          <span>Crédit d’impôt (50 %)</span><strong>- 600 €</strong>
+          <span class="total">Coût réel pour vous</span><strong class="total">600 €</strong>
+        </div>
+      </div>
+
+      {site.sap.avanceImmediate && (
+        <>
+          <h2>L’avance immédiate : ne payez que 50 % dès maintenant</h2>
+          <p>
+            Grâce au service d’<strong>avance immédiate</strong> de l’URSSAF, vous n’avancez plus la totalité de la
+            somme en attendant le remboursement l’année suivante. Le crédit d’impôt est déduit directement :
+          </p>
+          <ol>
+            <li>Nous vous inscrivons auprès de l’URSSAF (il suffit d’une adresse email et de vos coordonnées bancaires).</li>
+            <li>Après chaque intervention, vous recevez une demande de paiement à valider sur votre espace particulier.</li>
+            <li>Seuls 50 % du montant sont prélevés sur votre compte. L’URSSAF nous verse le reste.</li>
+          </ol>
+          <p>L’inscription est gratuite et sans engagement. Vous pouvez aussi choisir de payer la totalité et de récupérer le crédit d’impôt avec votre déclaration de revenus.</p>
+        </>
+      )}
+
+      <h2>Les travaux concernés</h2>
+      <table>
+        <thead><tr><th>Éligible (50 %)</th><th>Non éligible</th></tr></thead>
+        <tbody>
+          <tr><td>Tonte de pelouse</td><td>Création de jardin, plantations nouvelles</td></tr>
+          <tr><td>Taille de haies et d’arbustes</td><td>Terrasses, allées, clôtures</td></tr>
+          <tr><td>Désherbage, binage</td><td>Installation d’arrosage automatique</td></tr>
+          <tr><td>Ramassage des feuilles</td><td>Abattage, élagage en hauteur</td></tr>
+          <tr><td>Débroussaillage</td><td>Prestations pour les entreprises</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Les conditions</h2>
+      <ul>
+        <li>Être un particulier, propriétaire ou locataire du jardin.</li>
+        <li>Le jardin est attenant à votre résidence en France.</li>
+        <li>Plafond : 5 000 € de dépenses par an et par foyer pour le jardinage.</li>
+        <li>Faire appel à une entreprise déclarée services à la personne{site.sap.enabled && <> (notre déclaration : n° {site.sap.number})</>}.</li>
+      </ul>
+      <p class="small muted">
+        Sources : article 199 sexdecies du Code général des impôts, <a href="https://www.servicesalapersonne.gouv.fr" target="_blank" rel="noopener">servicesalapersonne.gouv.fr</a>, <a href="https://www.urssaf.fr" target="_blank" rel="noopener">urssaf.fr</a>.
+        Informations données à titre indicatif ; les règles fiscales peuvent évoluer.
+      </p>
+
+      <h2>Questions fréquentes</h2>
+      <Faq items={faq} />
+
+      <p style="margin-top:2rem"><a class="btn btn--primary" href={url('devis/')}>Demander un devis avec le prix après crédit d’impôt</a></p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

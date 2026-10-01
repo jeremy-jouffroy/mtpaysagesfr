@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+import { ph } from '../scripts/utils';
+---
+<Base title="Qui sommes-nous" description={`${site.name}, entreprise de jardinage et paysage à ${site.address.city} : notre histoire, notre équipe et nos engagements.`}>
+  <PageHero title="Qui sommes-nous ?" lead={`${site.name} est une entreprise locale de jardinage et d’aménagement paysager installée à ${site.address.city}.`} />
+
+  <section class="section">
+    <div class="container grid grid-2" style="align-items:center">
+      <img src={ph('Portrait du dirigeant\ndans un jardin', 700, 800)} alt={`${site.legal.director}, fondateur de ${site.name}`} width="700" height="800" style="border-radius:var(--radius)" />
+      <div class="prose">
+        <span class="eyebrow">Notre histoire</span>
+        <h2>[Titre de l’histoire]</h2>
+        <p class="placeholder-note">TODO : raconter l’histoire en 3 ou 4 paragraphes, à la première personne : parcours, formation (CAP/BP Aménagements paysagers…), création de l’entreprise, ce qui vous plaît dans le métier.</p>
+        <p>[Paragraphe 1]</p>
+        <p>[Paragraphe 2]</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Nos engagements</span><h2>Notre façon de travailler</h2></div>
+      <div class="grid grid-3">
+        <div class="card"><div class="card-body"><h3>🌱 Zéro pesticide</h3><p class="muted">Désherbage manuel, mécanique ou thermique. Aucun produit phytosanitaire de synthèse dans votre jardin.</p></div></div>
+        <div class="card"><div class="card-body"><h3>♻️ Déchets valorisés</h3><p class="muted">Branchages broyés en paillage ou apportés en plateforme de compostage. Rien ne part à l’enfouissement.</p></div></div>
+        <div class="card"><div class="card-body"><h3>💧 Économie d’eau</h3><p class="muted">Plantes adaptées au climat local, paillage et arrosage au goutte-à-goutte.</p></div></div>
+        <div class="card"><div class="card-body"><h3>🕐 Ponctualité</h3><p class="muted">Vous êtes prévenu la veille et nous respectons les dates prévues.</p></div></div>
+        <div class="card"><div class="card-body"><h3>🧾 Devis clairs</h3><p class="muted">Un prix détaillé et ferme, avec le montant après crédit d’impôt. Pas de mauvaise surprise.</p></div></div>
+        <div class="card"><div class="card-body"><h3>🛡️ Assurés</h3><p class="muted">Responsabilité civile professionnelle{site.sap.enabled && ', entreprise déclarée services à la personne'}.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">L’équipe et le matériel</span><h2>Des professionnels bien équipés</h2></div>
+      <div class="gallery">
+        <figure><img src={ph('Photo de l’équipe\nen tenue de travail', 600, 450)} alt="L'équipe" loading="lazy" width="600" height="450" /></figure>
+        <figure><img src={ph('Camion et remorque\nlogotés MT Paysage', 600, 450)} alt="Véhicule de l'entreprise" loading="lazy" width="600" height="450" /></figure>
+        <figure><img src={ph('Matériel professionnel :\ntondeuse, taille-haie, broyeur', 600, 450)} alt="Matériel professionnel" loading="lazy" width="600" height="450" /></figure>
+      </div>
+      <h3 style="margin-top:2.5rem">Qualifications et labels</h3>
+      <p class="placeholder-note">TODO : afficher uniquement les qualifications réellement obtenues (logos et numéros) : déclaration SAP, adhésion Unep, label Qualipaysage, Certiphyto, diplômes.</p>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

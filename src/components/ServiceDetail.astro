@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from './PageHero.astro';
+import Faq from './Faq.astro';
+import CtaBand from './CtaBand.astro';
+import TaxCreditBox from './TaxCreditBox.astro';
+import ServiceCard from './ServiceCard.astro';
+import { site } from '../config/site';
+import { services, type Service } from '../data/services';
+import { url, ph, telHref } from '../scripts/utils';
+
+interface Props { service: Service }
+const { service: s } = Astro.props;
+
+const parent =
+  s.category === 'entretien'
+    ? { label: 'Entretien de jardin', href: 'entretien-jardin/' }
+    : { label: 'Création et aménagement', href: 'creation-amenagement/' };
+const prestation =
+  s.slug === 'taille-haies-arbustes' ? 'Taille de haies' : s.category === 'entretien' ? 'Entretien régulier' : 'Création / aménagement';
+const related = services.filter((o) => o.category === s.category && o.slug !== s.slug).slice(0, 3);
+const showTax = s.sapEligible && site.sap.enabled;
+---
+<Base title={`${s.h1} à ${site.address.city}`} description={s.metaDescription} faq={s.faq} image={ph(s.images[0], 1200, 630)}>
+  <PageHero title={s.h1} lead={s.intro} crumbs={[parent]}>
+    {showTax && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
+  </PageHero>
+
+  <section class="section">
+    <div class="container layout-aside">
+      <div>
+        <h2>Ce que comprend la prestation</h2>
+        <ul class="checklist">
+          {s.includes.map((i) => <li>{i}</li>)}
+        </ul>
+
+        {s.frequency && (
+          <>
+            <h3 style="margin-top:2rem">Fréquence conseillée</h3>
+            <p>{s.frequency}</p>
+          </>
+        )}
+
+        <h3 style="margin-top:2rem">Tarif</h3>
+        <p>
+          {s.priceFrom ? <>À partir de <strong>{s.priceFrom}</strong>{showTax && ', avant crédit d’impôt'}.</> : 'Sur devis gratuit, après une visite de votre jardin.'}
+          {' '}Le prix dépend de la surface, de l’accès et du volume de déchets verts.
+        </p>
+
+        <div class="gallery" style="margin-top:2rem">
+          {s.images.map((img) => (
+            <figure>
+              <img src={ph(img, 600, 450)} alt={img.replace(/\n/g, ' ')} loading="lazy" width="600" height="450" />
+            </figure>
+          ))}
+        </div>
+
+        {s.faq.length > 0 && (
+          <>
+            <h2 style="margin-top:3rem">Questions fréquentes</h2>
+            <Faq items={s.faq} />
+          </>
+        )}
+      </div>
+
+      <aside class="aside-sticky">
+        <div class="form-card">
+          <h3>Devis gratuit</h3>
+          <p class="small muted">Décrivez votre besoin en 2 minutes, nous vous répondons sous 48 h.</p>
+          <a class="btn btn--primary" style="width:100%" href={url(`devis/?prestation=${encodeURIComponent(prestation)}`)}>Demander un devis</a>
+          <p class="small" style="text-align:center;margin:0.75rem 0 0">ou <a href={telHref(site.phone)}>{site.phone}</a></p>
+        </div>
+        {showTax && <TaxCreditBox />}
+        {!s.sapEligible && (
+          <p class="small muted">
+            Ces travaux de création n’ouvrent pas droit au crédit d’impôt. L’entretien du jardin réalisé ensuite, lui, y
+            ouvre droit.
+          </p>
+        )}
+      </aside>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="section section--alt">
+      <div class="container">
+        <h2>Autres prestations</h2>
+        <div class="grid grid-3">
+          {related.map((r) => <ServiceCard service={r} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</Base>

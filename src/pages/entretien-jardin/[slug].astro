@@ -1,0 +1,10 @@
+---
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import { byCategory, type Service } from '../../data/services';
+
+export function getStaticPaths() {
+  return byCategory('entretien').map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+const { service } = Astro.props as { service: Service };
+---
+<ServiceDetail service={service} />

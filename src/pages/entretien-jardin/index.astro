@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import TaxCreditBox from '../../components/TaxCreditBox.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { site } from '../../config/site';
+import { byCategory } from '../../data/services';
+import { url } from '../../scripts/utils';
+
+const faq = [
+  { q: 'Proposez-vous des interventions ponctuelles ?', a: 'Oui. Vous pouvez faire appel à nous pour une seule intervention (taille de haie, nettoyage d’automne…) ou souscrire un contrat d’entretien annuel.' },
+  { q: 'Fournissez-vous le matériel ?', a: 'Oui. Nous venons avec tout le matériel professionnel nécessaire et nous évacuons les déchets verts.' },
+  { q: 'Comment fonctionne le crédit d’impôt ?', a: 'Vous bénéficiez de 50 % de crédit d’impôt sur le montant des prestations d’entretien, dans la limite de 5 000 € de dépenses par an et par foyer. Avec l’avance immédiate, la réduction est appliquée dès le paiement.' },
+];
+---
+<Base title={`Entretien de jardin à ${site.address.city}`} description={`Entretien de jardin à ${site.address.city} : tonte, taille de haies, désherbage, ramassage des feuilles. 50 % de crédit d'impôt, devis gratuit.`} faq={faq}>
+  <PageHero
+    title="Entretien de jardin"
+    lead="Tonte, taille de haies, désherbage, nettoyage d’automne : nous entretenons votre jardin à la fréquence qui vous convient, ponctuellement ou toute l’année."
+  >
+    {site.sap.enabled && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {byCategory('entretien').map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container grid grid-2" style="align-items:center">
+      <div>
+        <span class="eyebrow">Tranquillité</span>
+        <h2>Un contrat d’entretien pour ne plus y penser</h2>
+        <p>Nous établissons avec vous un calendrier d’interventions pour l’année. Vous êtes prévenu avant chaque passage et vous recevez une facture claire, avec l’attestation fiscale chaque début d’année.</p>
+        <a class="btn btn--outline" href={url('contrats-entretien/')}>Découvrir nos contrats</a>
+      </div>
+      <TaxCreditBox />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:820px">
+      <h2>Questions fréquentes</h2>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

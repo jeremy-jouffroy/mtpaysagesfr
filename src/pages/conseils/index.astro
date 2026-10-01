@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { ph } from '../../scripts/utils';
+
+type Post = { frontmatter: { title: string; description: string; date: string; image: string }; url: string };
+const posts = Object.values(import.meta.glob<Post>('./*.md', { eager: true })).sort(
+  (a, b) => +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date),
+);
+---
+<Base title="Conseils jardin" description="Nos conseils de jardinier pour entretenir votre jardin au fil des saisons.">
+  <PageHero title="Conseils de jardinier" lead="Taille, calendrier, réglementation : nos conseils pour un jardin en bonne santé toute l’année." />
+  <section class="section">
+    <div class="container grid grid-3">
+      {posts.map((p) => (
+        <a class="card" href={p.url + '/'}>
+          <img src={ph(p.frontmatter.image, 600, 340)} alt="" width="600" height="340" loading="lazy" />
+          <div class="card-body">
+            <h3>{p.frontmatter.title}</h3>
+            <p class="muted small">{p.frontmatter.description}</p>
+            <span class="more">Lire l’article →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

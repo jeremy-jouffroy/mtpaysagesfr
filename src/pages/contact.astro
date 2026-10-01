@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { site } from '../config/site';
+import { telHref } from '../scripts/utils';
+---
+<Base title="Contact" description={`Contactez ${site.name}, jardinier paysagiste à ${site.address.city} : téléphone, email ou formulaire.`}>
+  <PageHero title="Nous contacter" lead="Par téléphone, par email ou via le formulaire : comme vous préférez." />
+  <section class="section">
+    <div class="container layout-aside">
+      <div class="form-card">
+        <h2>Envoyez-nous un message</h2>
+        <QuoteForm />
+      </div>
+      <aside class="aside-sticky">
+        <div class="card"><div class="card-body">
+          <h3>Coordonnées</h3>
+          <p>
+            <strong>Téléphone :</strong> <a href={telHref(site.phone)}>{site.phone}</a><br />
+            <strong>Email :</strong> <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+          <p>
+            <strong>Adresse :</strong><br />
+            {site.address.street}<br />
+            {site.address.postalCode} {site.address.city}
+          </p>
+          <p class="small muted">{site.hours}</p>
+        </div></div>
+      </aside>
+    </div>
+  </section>
+</Base>

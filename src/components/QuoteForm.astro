@@ -1,0 +1,151 @@
+---
+// Formulaire de demande de devis.
+// Envoi via Web3Forms (https://web3forms.com) : le site reste 100 % statique sur GitHub Pages,
+// et chaque demande arrive par email à l'adresse liée à la clé d'accès.
+import { site } from '../config/site';
+import { url } from '../scripts/utils';
+
+const thanksUrl = new URL(url('merci/'), Astro.site).href;
+const prestations = [
+  'Entretien régulier',
+  'Intervention ponctuelle',
+  'Taille de haies',
+  'Création / aménagement',
+  'Élagage / abattage',
+  'Autre',
+];
+---
+<form class="form" id="quote-form" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value={site.web3formsKey} />
+  <input type="hidden" name="subject" value={`Nouvelle demande de devis – ${site.name}`} />
+  <input type="hidden" name="from_name" value={`Site ${site.name}`} />
+  <input type="hidden" name="redirect" value={thanksUrl} />
+  <!-- Anti-spam : champ invisible que seuls les robots remplissent -->
+  <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" />
+
+  <fieldset class="field">
+    <legend>Quelle prestation vous intéresse ?</legend>
+    <div class="chips">
+      {prestations.map((p) => (
+        <label><input type="checkbox" name="Prestations" value={p} /> {p}</label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="f-surface">Surface approximative du jardin</label>
+      <select id="f-surface" name="Surface">
+        <option value="">Je ne sais pas</option>
+        <option>Moins de 200 m²</option>
+        <option>200 à 500 m²</option>
+        <option>500 à 1 000 m²</option>
+        <option>1 000 à 2 500 m²</option>
+        <option>Plus de 2 500 m²</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="f-cp">Code postal ou commune *</label>
+      <input id="f-cp" name="Commune" required autocomplete="postal-code" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="f-msg">Votre projet</label>
+    <textarea id="f-msg" name="Message" placeholder="Ex. : haie de thuyas de 30 m à tailler, pelouse à tondre toutes les deux semaines…"></textarea>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="f-name">Nom *</label>
+      <input id="f-name" name="name" required autocomplete="name" />
+    </div>
+    <div class="field">
+      <label for="f-phone">Téléphone</label>
+      <input id="f-phone" name="Téléphone" type="tel" autocomplete="tel" inputmode="tel" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label for="f-email">Email *</label>
+      <input id="f-email" name="email" type="email" required autocomplete="email" />
+    </div>
+    <div class="field">
+      <label for="f-contact">Comment préférez-vous être recontacté ?</label>
+      <select id="f-contact" name="Contact préféré">
+        <option>Par email</option>
+        <option>Par SMS</option>
+        <option>Par téléphone</option>
+      </select>
+    </div>
+  </div>
+
+  <p class="small muted">
+    📷 Vous avez des photos de votre jardin ? Vous pourrez nous les envoyer en réponse à notre email ou par SMS.
+  </p>
+
+  <label class="consent">
+    <input type="checkbox" name="Consentement RGPD" value="Oui" required />
+    <span>
+      J’accepte que mes données soient utilisées pour traiter ma demande de devis. Elles ne sont ni revendues ni
+      utilisées à d’autres fins. <a href={url('confidentialite/')}>En savoir plus</a>
+    </span>
+  </label>
+
+  <div class="form-status" role="status" aria-live="polite"></div>
+
+  <div>
+    <button class="btn btn--primary" type="submit">Envoyer ma demande</button>
+    <p class="small muted" style="margin-top:0.6rem">* Champs obligatoires · Réponse sous 48 h ouvrées</p>
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+
+  if (form) {
+    // Pré-cocher une prestation passée dans l'URL : /devis/?prestation=Taille%20de%20haies
+    const pre = new URLSearchParams(location.search).get('prestation');
+    if (pre) {
+      form.querySelectorAll<HTMLInputElement>('input[name="Prestations"]').forEach((cb) => {
+        if (cb.value === pre) cb.checked = true;
+      });
+    }
+
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const thanks = (form.elements.namedItem('redirect') as HTMLInputElement).value;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data: Record<string, string | boolean> = {};
+      for (const [key, value] of new FormData(form)) {
+        if (key === 'redirect') continue;
+        data[key] = key in data ? `${data[key]}, ${value}` : String(value);
+      }
+      data.botcheck = Boolean(data.botcheck);
+
+      button.disabled = true;
+      button.textContent = 'Envoi en cours…';
+      status.className = 'form-status';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error(json.message);
+        location.href = thanks;
+      } catch {
+        status.className = 'form-status err';
+        status.textContent =
+          'L’envoi a échoué. Merci de réessayer ou de nous contacter directement par téléphone ou par email.';
+        button.disabled = false;
+        button.textContent = 'Envoyer ma demande';
+      }
+    });
+  }
+</script>

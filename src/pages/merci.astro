@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+import { url, telHref } from '../scripts/utils';
+---
+<Base title="Demande envoyée" noindex>
+  <section class="section">
+    <div class="container" style="max-width:640px;text-align:center">
+      <p style="font-size:3rem;margin:0">🌿</p>
+      <h1>Merci, votre demande est bien envoyée !</h1>
+      <p class="lead">Nous vous recontactons sous 48 h ouvrées. En cas d’urgence, appelez-nous au <a href={telHref(site.phone)}>{site.phone}</a>.</p>
+      <p class="muted">Si vous avez des photos de votre jardin, vous pourrez nous les envoyer en réponse à notre email : elles nous aident à préparer la visite.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:2rem">
+        <a class="btn btn--outline" href={url('realisations/')}>Voir nos réalisations</a>
+        <a class="btn btn--primary" href={url('/')}>Retour à l’accueil</a>
+      </div>
+    </div>
+  </section>
+</Base>

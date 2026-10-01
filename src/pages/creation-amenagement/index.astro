@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { site } from '../../config/site';
+import { byCategory } from '../../data/services';
+import { ph } from '../../scripts/utils';
+---
+<Base title={`Création et aménagement de jardin à ${site.address.city}`} description={`Paysagiste à ${site.address.city} : création de massifs, pelouses, terrasses, allées, clôtures et arrosage automatique. Étude et devis gratuits.`}>
+  <PageHero
+    title="Création et aménagement de jardin"
+    lead="Du simple massif à la transformation complète de votre extérieur, nous concevons et réalisons un jardin adapté à votre terrain, à votre budget et au temps que vous souhaitez y consacrer."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {byCategory('creation').map((s) => <ServiceCard service={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container grid grid-2" style="align-items:center">
+      <img src={ph('Plan d’aménagement\nà côté du jardin réalisé', 700, 500)} alt="Plan d'aménagement paysager" loading="lazy" width="700" height="500" style="border-radius:var(--radius)" />
+      <div>
+        <span class="eyebrow">Notre méthode</span>
+        <h2>De l’idée au jardin fini</h2>
+        <ol class="checklist">
+          <li><strong>Visite et écoute :</strong> vos envies, vos usages, votre budget, la nature du sol et l’exposition.</li>
+          <li><strong>Proposition :</strong> un plan ou un croquis, une palette de végétaux et un devis détaillé.</li>
+          <li><strong>Réalisation :</strong> terrassement, maçonnerie paysagère, plantations, engazonnement.</li>
+          <li><strong>Suivi :</strong> conseils d’entretien, garantie de reprise et contrat d’entretien si vous le souhaitez.</li>
+        </ol>
+        <p class="small muted">Nous privilégions les plantes locales, économes en eau et favorables à la biodiversité.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Parlons de votre projet" text="Visite et devis gratuits, sans engagement." />
+</Base>

@@ -1,0 +1,45 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../config/site';
+---
+<Legal title="Politique de confidentialité" description="Comment nous utilisons vos données personnelles.">
+  <p class="placeholder-note">TODO : faire relire cette page. Elle décrit le fonctionnement actuel du site (formulaire via Web3Forms, aucun cookie, aucun outil de mesure d’audience).</p>
+
+  <h2>Responsable du traitement</h2>
+  <p>{site.legal.companyName}, {site.address.street}, {site.address.postalCode} {site.address.city} – {site.email}</p>
+
+  <h2>Données collectées et finalité</h2>
+  <p>
+    Lorsque vous remplissez le formulaire de demande de devis, nous recueillons votre nom, votre email, et
+    facultativement votre téléphone, votre commune et la description de votre projet. Ces données servent uniquement à
+    répondre à votre demande et à établir un devis.
+  </p>
+  <p>Base légale : mesures précontractuelles prises à votre demande (article 6.1.b du RGPD).</p>
+
+  <h2>Destinataires</h2>
+  <p>
+    Vos données sont destinées à {site.legal.companyName} uniquement. Elles transitent par le service d’envoi de
+    formulaires <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">Web3Forms</a>, qui les transmet par
+    email sans les conserver. Elles ne sont jamais vendues ni cédées.
+  </p>
+
+  <h2>Durée de conservation</h2>
+  <p>
+    Trois ans à compter de notre dernier échange si votre demande n’aboutit pas à une prestation. Si vous devenez
+    client, pendant la durée de la relation commerciale, puis selon les durées légales de conservation des documents comptables.
+  </p>
+
+  <h2>Cookies et mesure d’audience</h2>
+  <p>Ce site ne dépose aucun cookie et n’utilise aucun outil de mesure d’audience ni de publicité.</p>
+  <p>
+    L’hébergeur (GitHub) peut enregistrer des journaux techniques (adresse IP) pour assurer la sécurité du service.
+    Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité de GitHub</a>.
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition sur vos données. Pour
+    l’exercer, écrivez-nous à <a href={`mailto:${site.email}`}>{site.email}</a>. Vous pouvez aussi introduire une
+    réclamation auprès de la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.
+  </p>
+</Legal>

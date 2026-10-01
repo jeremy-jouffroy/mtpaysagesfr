@@ -1,0 +1,49 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../config/site';
+---
+<Legal title="Conditions générales de vente" description={`Conditions générales de vente de ${site.name}.`}>
+  <p class="placeholder-note">
+    TODO : trame de base à compléter et à faire valider par un professionnel (expert-comptable, juriste ou organisation
+    professionnelle comme l’Unep). Elle ne remplace pas un conseil juridique.
+  </p>
+
+  <h2>1. Objet</h2>
+  <p>Les présentes conditions s’appliquent aux prestations d’entretien et d’aménagement de jardins réalisées par {site.legal.companyName} pour ses clients particuliers et professionnels.</p>
+
+  <h2>2. Devis</h2>
+  <p>Toute prestation fait l’objet d’un devis gratuit, valable [30] jours. La commande est ferme à réception du devis daté, signé et portant la mention « Bon pour accord ».</p>
+
+  <h2>3. Droit de rétractation</h2>
+  <p>
+    Pour un contrat conclu à distance ou hors établissement (par exemple signé à votre domicile), le client
+    consommateur dispose d’un délai de 14 jours pour se rétracter, sans avoir à se justifier
+    (articles L.221-18 et suivants du Code de la consommation). Un formulaire de rétractation est joint au devis. Si le
+    client demande expressément que les travaux commencent avant la fin de ce délai, il devra payer les prestations
+    déjà réalisées.
+  </p>
+
+  <h2>4. Prix et paiement</h2>
+  <p>
+    Les prix sont indiqués TTC. [Conditions d’acompte pour les travaux de création.] Paiement à réception de facture
+    par virement, chèque, carte bancaire, CESU préfinancé{site.sap.avanceImmediate && ' ou via le service d’avance immédiate de l’URSSAF'}.
+  </p>
+
+  <h2>5. Crédit d’impôt</h2>
+  <p>
+    Pour les prestations éligibles, une attestation fiscale est délivrée chaque année. L’éligibilité au crédit d’impôt
+    dépend de la situation du client et de la réglementation en vigueur, que {site.legal.companyName} ne peut pas garantir.
+  </p>
+
+  <h2>6. Contrats d’entretien</h2>
+  <p>[Durée, reconduction, résiliation, révision des prix, report des passages en cas d’intempéries.]</p>
+
+  <h2>7. Garanties</h2>
+  <p>[Garantie de reprise des végétaux : conditions et durée.] [Garantie décennale pour les ouvrages concernés : assureur et numéro de police.]</p>
+
+  <h2>8. Médiation</h2>
+  <p>
+    En cas de litige, le client peut recourir gratuitement au médiateur de la consommation :
+    <a href={site.legal.mediator.url}>{site.legal.mediator.name}</a>.
+  </p>
+</Legal>

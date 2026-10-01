@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+import { url, ph } from '../scripts/utils';
+
+// TODO : supprimer cette page (et ses liens) si l'entreprise ne propose pas l'élagage.
+const faq = [
+  { q: 'Faut-il une autorisation pour abattre un arbre ?', a: 'Dans un jardin privé, c’est généralement libre. Mais le plan local d’urbanisme, un espace boisé classé ou un périmètre protégé peuvent l’imposer. Nous vérifions avec vous avant l’intervention.' },
+  { q: 'Mon voisin peut-il m’obliger à couper les branches qui dépassent ?', a: 'Oui. Le Code civil (article 673) permet à votre voisin d’exiger que les branches qui avancent sur sa propriété soient coupées.' },
+  { q: 'L’élagage ouvre-t-il droit au crédit d’impôt ?', a: 'Les petits travaux de taille réalisés depuis le sol peuvent y ouvrir droit. Les travaux d’élagage en hauteur et l’abattage n’y ouvrent pas droit. Nous vous l’indiquons clairement sur le devis.' },
+];
+---
+<Base title={`Élagage et abattage d’arbres à ${site.address.city}`} description={`Élagage, taille raisonnée et abattage d'arbres en sécurité à ${site.address.city}. Évacuation du bois et dessouchage sur demande.`} faq={faq}>
+  <PageHero title="Élagage et abattage d’arbres" lead="Un arbre trop grand, dangereux ou gênant ? Nous le taillons ou l’abattons en toute sécurité, avec le matériel adapté, puis nous évacuons le bois." />
+  <section class="section">
+    <div class="container grid grid-2">
+      <div>
+        <h2>Nos interventions</h2>
+        <ul class="checklist">
+          <li>Taille raisonnée et élagage (allègement, éclaircie, mise au gabarit)</li>
+          <li>Suppression du bois mort et des branches dangereuses</li>
+          <li>Abattage direct ou par démontage, selon l’espace disponible</li>
+          <li>Rognage de souche ou dessouchage</li>
+          <li>Broyage des branches, découpe du bois en bûches sur demande</li>
+        </ul>
+        <p class="muted small">Toutes nos interventions sont couvertes par notre assurance responsabilité civile professionnelle.</p>
+        <a class="btn btn--primary" href={url('devis/?prestation=' + encodeURIComponent('Élagage / abattage'))}>Demander un devis</a>
+      </div>
+      <img src={ph('Élagueur encordé\ndans un grand arbre', 700, 520)} alt="Élagage d'un arbre" loading="lazy" width="700" height="520" style="border-radius:var(--radius)" />
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container" style="max-width:820px">
+      <h2>Questions fréquentes</h2>
+      <Faq items={faq} />
+    </div>
+  </section>
+  <CtaBand />
+</Base>

@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import TaxCreditBox from '../components/TaxCreditBox.astro';
+import { site } from '../config/site';
+import { url } from '../scripts/utils';
+
+// TODO : adapter le contenu et le nombre de passages des formules à l'offre réelle.
+const plans = [
+  {
+    name: 'Essentiel',
+    for: 'Petits jardins, entretien de base',
+    items: ['Tonte de mars à octobre (≈ 12 passages)', '1 taille de haie par an', 'Évacuation des déchets verts'],
+  },
+  {
+    name: 'Sérénité',
+    for: 'Le jardin toujours impeccable',
+    highlight: true,
+    items: ['Tonte de mars à octobre (≈ 15 passages)', '2 tailles de haies et arbustes par an', 'Désherbage des massifs et allées', 'Ramassage des feuilles à l’automne', 'Évacuation des déchets verts'],
+  },
+  {
+    name: 'Sur mesure',
+    for: 'Grands terrains, besoins spécifiques',
+    items: ['Calendrier établi ensemble', 'Toutes prestations d’entretien', 'Interlocuteur unique', 'Passage de contrôle après les intempéries'],
+  },
+];
+---
+<Base title="Contrats d’entretien de jardin à l’année" description={`Contrats d'entretien de jardin à l'année à ${site.address.city} pour particuliers, copropriétés et entreprises. 50 % de crédit d'impôt pour les particuliers.`}>
+  <PageHero title="Contrats d’entretien à l’année" lead="Un calendrier d’interventions fixé ensemble, un budget connu à l’avance et un jardin entretenu toute l’année sans que vous ayez à y penser." />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Particuliers</span><h2>Nos formules</h2></div>
+      <div class="grid grid-3">
+        {plans.map((p) => (
+          <div class="card" style={p.highlight ? 'border:2px solid var(--green-700)' : ''}>
+            <div class="card-body">
+              {p.highlight && <p><span class="badge badge--soft">La plus choisie</span></p>}
+              <h3>{p.name}</h3>
+              <p class="muted small">{p.for}</p>
+              <ul class="checklist small">{p.items.map((i) => <li>{i}</li>)}</ul>
+              <p style="margin-top:1rem"><strong>Sur devis</strong>{site.sap.enabled && <span class="small muted"> · -50 % de crédit d’impôt</span>}</p>
+              <a class="btn btn--outline" style="margin-top:auto" href={url('devis/?prestation=' + encodeURIComponent('Entretien régulier'))}>Demander un devis</a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="small muted" style="margin-top:1rem">Paiement mensuel possible. Contrat d’un an, résiliable dans les conditions prévues aux CGV.</p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container grid grid-2">
+      <div>
+        <span class="eyebrow">Professionnels</span>
+        <h2>Copropriétés, entreprises et collectivités</h2>
+        <p>Espaces verts de résidences, abords de bureaux, de commerces ou de locaux d’activité : nous assurons l’entretien régulier avec un cahier des charges précis et un interlocuteur dédié.</p>
+        <ul class="checklist">
+          <li>Visite du site et chiffrage poste par poste</li>
+          <li>Planning annuel communiqué au syndic ou au gestionnaire</li>
+          <li>Compte rendu après chaque intervention</li>
+          <li>Interventions ponctuelles (tempête, élagage, remise en état)</li>
+        </ul>
+        <a class="btn btn--primary" href={url('devis/')}>Demander une visite</a>
+      </div>
+      <TaxCreditBox />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

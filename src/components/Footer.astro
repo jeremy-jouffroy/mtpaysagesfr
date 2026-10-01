@@ -1,0 +1,60 @@
+---
+import { site } from '../config/site';
+import { byCategory } from '../data/services';
+import { url, telHref } from '../scripts/utils';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>{site.name}</h3>
+        <p>
+          {site.address.street}<br />
+          {site.address.postalCode} {site.address.city}
+        </p>
+        <p>
+          <a href={telHref(site.phone)}>{site.phone}</a><br />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+        <p class="small">{site.hours}</p>
+      </div>
+      <div>
+        <h3>Entretien</h3>
+        <ul>
+          {byCategory('entretien').map((s) => <li><a href={url(`entretien-jardin/${s.slug}/`)}>{s.title}</a></li>)}
+          <li><a href={url('contrats-entretien/')}>Contrats d’entretien</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Création</h3>
+        <ul>
+          {byCategory('creation').map((s) => <li><a href={url(`creation-amenagement/${s.slug}/`)}>{s.title}</a></li>)}
+          <li><a href={url('elagage-abattage/')}>Élagage et abattage</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>L’entreprise</h3>
+        <ul>
+          <li><a href={url('a-propos/')}>Qui sommes-nous</a></li>
+          <li><a href={url('realisations/')}>Réalisations</a></li>
+          <li><a href={url('avis/')}>Avis clients</a></li>
+          <li><a href={url('zone-intervention/')}>Zone d’intervention</a></li>
+          <li><a href={url('credit-impot-50/')}>Crédit d’impôt 50 %</a></li>
+          <li><a href={url('conseils/')}>Conseils jardin</a></li>
+          <li><a href={url('devis/')}>Demander un devis</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        © {new Date().getFullYear()} {site.legal.companyName} · SIRET {site.legal.siret}
+        {site.sap.enabled && <> · Déclaration SAP n° {site.sap.number}</>}
+      </p>
+      <ul>
+        <li><a href={url('mentions-legales/')}>Mentions légales</a></li>
+        <li><a href={url('confidentialite/')}>Confidentialité</a></li>
+        <li><a href={url('cgv/')}>CGV</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

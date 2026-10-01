@@ -1,0 +1,39 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../config/site';
+import { url } from '../scripts/utils';
+const l = site.legal;
+---
+<Legal title="Mentions légales" description={`Mentions légales du site ${site.name}.`}>
+  <h2>Éditeur du site</h2>
+  <p>
+    {l.companyName}, {l.legalForm}{l.capital && <> au capital de {l.capital}</>}<br />
+    Siège : {site.address.street}, {site.address.postalCode} {site.address.city}<br />
+    SIRET : {l.siret} · {l.registry}<br />
+    N° TVA intracommunautaire : {l.vat}<br />
+    {site.sap.enabled && <>Déclaration services à la personne : n° {site.sap.number}<br /></>}
+    Téléphone : {site.phone} · Email : {site.email}
+  </p>
+  <p>Directeur de la publication : {l.director}</p>
+
+  <h2>Assurance professionnelle</h2>
+  <p>{l.insurer}. Couverture géographique : France.</p>
+
+  <h2>Hébergement</h2>
+  <p>{site.host.name}, {site.host.address} – <a href={site.host.url}>{site.host.url}</a></p>
+
+  <h2>Médiation de la consommation</h2>
+  <p>
+    Conformément aux articles L.612-1 et suivants du Code de la consommation, en cas de litige non résolu avec nous, vous
+    pouvez recourir gratuitement au médiateur de la consommation : <a href={l.mediator.url}>{l.mediator.name}</a>.
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    Les textes et photographies de ce site sont la propriété de {l.companyName}, sauf mention contraire. Toute
+    reproduction sans autorisation est interdite.
+  </p>
+
+  <h2>Données personnelles</h2>
+  <p>Voir notre <a href={url("confidentialite/")}>politique de confidentialité</a>.</p>
+</Legal>

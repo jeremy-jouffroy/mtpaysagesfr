@@ -1,0 +1,24 @@
+---
+import { site } from '../config/site';
+import { url, telHref } from '../scripts/utils';
+
+interface Props { title?: string; text?: string }
+const {
+  title = 'Un projet pour votre jardin ?',
+  text = 'Devis gratuit et sans engagement. Nous vous répondons sous 48 h.',
+} = Astro.props;
+---
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--light" href={url('devis/')}>Demander un devis</a>
+        <a class="btn btn--outline" style="color:#fff" href={telHref(site.phone)}>📞 {site.phone}</a>
+      </div>
+    </div>
+  </div>
+</section>
