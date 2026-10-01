@@ -2,29 +2,36 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { ph } from '../scripts/utils';
+import { img, imgAlt } from '../scripts/utils';
 
-// TODO : remplacer par de vrais chantiers. Une photo avant/après (côte à côte) par projet fonctionne le mieux.
+// Ajouter un projet : déposer la photo dans public/images/, la déclarer dans src/data/photos.ts, puis l'ajouter ici.
+// Une photo avant/après par projet fonctionne le mieux.
 const projects = [
-  { cat: 'entretien', title: 'Taille d’une haie de laurier de 40 m', place: '[Commune]', img: 'AVANT / APRÈS\nHaie de laurier 40 m' },
-  { cat: 'entretien', title: 'Remise en état d’un jardin abandonné', place: '[Commune]', img: 'AVANT / APRÈS\nJardin en friche remis en état' },
-  { cat: 'entretien', title: 'Nettoyage d’automne', place: '[Commune]', img: 'AVANT / APRÈS\nPelouse couverte de feuilles' },
-  { cat: 'creation', title: 'Création d’un massif de vivaces', place: '[Commune]', img: 'AVANT / APRÈS\nMassif de vivaces' },
-  { cat: 'creation', title: 'Terrasse bois et pas japonais', place: '[Commune]', img: 'AVANT / APRÈS\nTerrasse en bois' },
-  { cat: 'creation', title: 'Engazonnement d’un terrain neuf', place: '[Commune]', img: 'AVANT / APRÈS\nTerrain nu → pelouse' },
-  { cat: 'creation', title: 'Clôture brise-vue et haie champêtre', place: '[Commune]', img: 'AVANT / APRÈS\nClôture et haie' },
-  { cat: 'elagage', title: 'Abattage d’un pin par démontage', place: '[Commune]', img: 'Abattage d’un pin\npar démontage' },
-  { cat: 'entretien', title: 'Débroussaillage d’un terrain de 2 000 m²', place: '[Commune]', img: 'AVANT / APRÈS\nDébroussaillage 2 000 m²' },
+  { cat: 'creation', title: 'Terrain de pétanque et terrasse bois', img: 'creation-terrain-petanque-terrasse-bois-avant-apres.webp' },
+  { cat: 'entretien', title: 'Taille d’arbustes en boule', img: 'taille-arbustes-en-boule-entretien-jardin-avant-apres.webp' },
+  { cat: 'creation', title: 'Massif d’arbustes et paillage minéral', img: 'creation-massif-arbustes-paillage-mineral-avant-apres.webp' },
+  { cat: 'entretien', title: 'Débroussaillage de la cour d’un corps de ferme', img: 'debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp' },
+  { cat: 'creation', title: 'Terrasse en carrelage extérieur', img: 'creation-terrasse-carrelage-exterieur-avant-apres.webp' },
+  { cat: 'entretien', title: 'Taille en nuage (niwaki) d’un genévrier', img: 'taille-niwaki-genevrier-en-nuage-avant-apres.webp' },
+  { cat: 'creation', title: 'Création d’une pelouse', img: 'avant-apres-creation-pelouse-gazon-jardin-saulon-la-rue.webp' },
+  { cat: 'entretien', title: 'Désherbage d’une cour dallée avec puits', img: 'desherbage-nettoyage-cour-dallee-puits-avant-apres.webp' },
+  { cat: 'creation', title: 'Plantation d’un grand olivier', img: 'plantation-grand-olivier-jardin-piscine-paysagiste.webp' },
+  { cat: 'entretien', title: 'Remise en état d’une allée gravillonnée', img: 'debroussaillage-allee-gravier-jardin-avant-apres.webp' },
+  { cat: 'creation', title: 'Semis de gazon et massifs paillés', img: 'semis-gazon-massifs-arbustes-paillage-mineral-avant-apres.webp' },
+  { cat: 'entretien', title: 'Arrachage d’une haie de thuyas', img: 'arrachage-haie-thuyas-nettoyage-jardin-avant-apres.webp' },
+  { cat: 'creation', title: 'Allée en pas japonais', img: 'allee-pas-japonais-dalles-pelouse-jardin.webp' },
+  { cat: 'entretien', title: 'Espaces verts d’une aire de jeux (collectivité)', img: 'entretien-espaces-verts-aire-de-jeux-collectivite.webp' },
+  { cat: 'creation', title: 'Plantation d’arbres tuteurés', img: 'plantation-arbres-tuteurage-jardin-paysagiste.webp' },
 ];
 const filters = [
   { key: 'all', label: 'Tout' },
   { key: 'entretien', label: 'Entretien' },
   { key: 'creation', label: 'Création' },
   { key: 'elagage', label: 'Élagage' },
-];
+].filter((f) => f.key === 'all' || projects.some((p) => p.cat === f.key));
 ---
 <Base title="Nos réalisations" description="Découvrez nos chantiers d'entretien et de création de jardins en photos avant / après.">
-  <PageHero title="Nos réalisations" lead="Quelques jardins que nous avons entretenus, transformés ou créés. Chaque projet est photographié avant et après notre passage." />
+  <PageHero title="Nos réalisations" lead="Quelques jardins que nous avons entretenus, transformés ou créés. La plupart sont photographiés avant et après notre passage." />
   <section class="section">
     <div class="container">
       <div class="filters" role="group" aria-label="Filtrer les réalisations">
@@ -33,8 +40,8 @@ const filters = [
       <div class="gallery" id="gallery">
         {projects.map((p) => (
           <figure data-cat={p.cat}>
-            <img src={ph(p.img, 600, 450)} alt={p.title} loading="lazy" width="600" height="450" />
-            <figcaption><strong>{p.title}</strong> · {p.place}</figcaption>
+            <img src={img(p.img)} alt={imgAlt(p.img)} loading="lazy" width="600" height="600" />
+            <figcaption><strong>{p.title}</strong></figcaption>
           </figure>
         ))}
       </div>

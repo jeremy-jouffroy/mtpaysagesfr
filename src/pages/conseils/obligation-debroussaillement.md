@@ -3,7 +3,7 @@ layout: ../../layouts/Article.astro
 title: "Obligation légale de débroussaillement : êtes-vous concerné ?"
 description: Qui doit débroussailler, sur quelle distance, et ce que vous risquez si vous ne le faites pas.
 date: 2026-08-20
-image: "Maison entourée\nd’une zone débroussaillée"
+image: debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp
 ---
 
 Dans les communes exposées aux feux de forêt, les propriétaires doivent débroussailler autour de leur habitation. Cette obligation protège votre maison et limite la propagation des incendies.

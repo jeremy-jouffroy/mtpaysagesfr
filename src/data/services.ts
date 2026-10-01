@@ -11,7 +11,7 @@ export type Service = {
   frequency?: string;
   priceFrom?: string; // ex. "35 € / h" — laisser vide pour afficher « Sur devis »
   sapEligible: boolean;
-  images: string[]; // descriptions des photos attendues
+  images: string[]; // photos (src/data/photos.ts) ou descriptions des photos attendues
   faq: Faq[];
 };
 
@@ -35,7 +35,7 @@ export const services: Service[] = [
     ],
     frequency: 'Toutes les 2 à 3 semaines de mars à octobre, à la demande ou par contrat.',
     sapEligible: true,
-    images: ['Pelouse fraîchement tondue\navec bordures nettes', 'Jardinier MT Paysages\nen train de tondre', 'Avant / après\ntonte d’une pelouse'],
+    images: ['haie-laurier-taillee-pelouse-entretien-jardin-saulon-la-rue.webp'],
     faq: [
       { q: 'À quelle hauteur faut-il tondre ?', a: "Entre 5 et 7 cm en général, un peu plus haut en été pour limiter le dessèchement. Nous adaptons la hauteur à la saison et à l'exposition." },
       { q: 'Faut-il être présent pendant l’intervention ?', a: 'Non. Il suffit que le jardin soit accessible. Nous vous prévenons la veille et vous envoyons un message une fois le travail terminé.' },
@@ -58,7 +58,11 @@ export const services: Service[] = [
     ],
     frequency: '1 à 2 fois par an selon les essences (fin d’hiver et fin d’été).',
     sapEligible: true,
-    images: ['Haie de laurier\nfraîchement taillée', 'Avant / après\ntaille de haie', 'Taille d’un arbuste\nen boule'],
+    images: [
+      'taille-arbustes-en-boule-entretien-jardin-avant-apres.webp',
+      'taille-niwaki-genevrier-en-nuage-avant-apres.webp',
+      'paysagiste-mt-paysages-taille-arbustes-secateur.webp',
+    ],
     faq: [
       { q: 'Quand tailler sa haie ?', a: "De préférence en fin d'hiver puis en fin d'été. L'Office français de la biodiversité recommande d'éviter les tailles importantes du 15 mars au 31 juillet pour ne pas déranger les oiseaux nicheurs." },
       { q: 'Que faites-vous des branchages ?', a: 'Nous les évacuons vers une plateforme de compostage ou les broyons sur place pour pailler vos massifs, si vous le souhaitez.' },
@@ -81,7 +85,7 @@ export const services: Service[] = [
     ],
     frequency: 'Toutes les 4 à 8 semaines pendant la saison de pousse.',
     sapEligible: true,
-    images: ['Massif fleuri\nparfaitement désherbé', 'Allée gravillonnée\navant / après désherbage'],
+    images: ['desherbage-nettoyage-cour-dallee-puits-avant-apres.webp', 'debroussaillage-allee-gravier-jardin-avant-apres.webp'],
     faq: [
       { q: 'Utilisez-vous du désherbant ?', a: 'Non. Nous travaillons sans produits phytosanitaires de synthèse, uniquement avec des méthodes manuelles, mécaniques ou thermiques.' },
     ],
@@ -125,7 +129,11 @@ export const services: Service[] = [
     ],
     frequency: 'Ponctuel, ou annuel pour les obligations légales de débroussaillement.',
     sapEligible: true,
-    images: ['Terrain envahi de ronces\navant débroussaillage', 'Même terrain\naprès débroussaillage'],
+    images: [
+      'debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp',
+      'debroussaillage-allee-gravier-jardin-avant-apres.webp',
+      'arrachage-haie-thuyas-nettoyage-jardin-avant-apres.webp',
+    ],
     faq: [
       { q: 'Suis-je concerné par l’obligation de débroussaillement ?', a: 'Si votre terrain se trouve dans une commune classée à risque, à moins de 200 m d’un bois ou d’une forêt, vous devez débroussailler dans un rayon de 50 m autour de votre habitation. Votre mairie peut vous le confirmer.' },
     ],
@@ -149,7 +157,12 @@ export const services: Service[] = [
       'Garantie de reprise des végétaux (selon conditions)',
     ],
     sapEligible: false,
-    images: ['Massif de vivaces\nnouvellement planté', 'Plantation d’une haie\nchampêtre', 'Plan d’aménagement\ndessiné à la main'],
+    images: [
+      'creation-massif-arbustes-paillage-mineral-avant-apres.webp',
+      'etapes-creation-massif-toile-paillage-mineral.webp',
+      'plantation-grand-olivier-jardin-piscine-paysagiste.webp',
+      'plantation-arbres-tuteurage-jardin-paysagiste.webp',
+    ],
     faq: [
       { q: 'Quelle est la meilleure période pour planter ?', a: "L'automne, de fin octobre à mars hors gel. Les racines s'installent pendant l'hiver et la reprise est bien meilleure." },
     ],
@@ -169,7 +182,7 @@ export const services: Service[] = [
       'Première tonte',
     ],
     sapEligible: false,
-    images: ['Pose de gazon\nen rouleau', 'Pelouse neuve\n6 semaines après semis'],
+    images: ['avant-apres-creation-pelouse-gazon-jardin-saulon-la-rue.webp', 'semis-gazon-massifs-arbustes-paillage-mineral-avant-apres.webp'],
     faq: [
       { q: 'Semis ou gazon en rouleau ?', a: 'Le semis coûte moins cher mais demande 2 à 3 mois avant d’être praticable. Le rouleau est utilisable en 3 à 4 semaines.' },
     ],
@@ -189,7 +202,12 @@ export const services: Service[] = [
       'Bordures, pas japonais, escaliers de jardin',
     ],
     sapEligible: false,
-    images: ['Terrasse en bois\navec jardin autour', 'Allée en pavés\nbordée de plantes', 'Pas japonais\ndans une pelouse'],
+    images: [
+      'creation-terrain-petanque-terrasse-bois-avant-apres.webp',
+      'creation-terrasse-carrelage-exterieur-avant-apres.webp',
+      'allee-pas-japonais-dalles-pelouse-jardin.webp',
+      'decaissement-mini-pelle-preparation-pavage-terrasse.webp',
+    ],
     faq: [
       { q: 'Faut-il une autorisation pour une terrasse ?', a: 'Une terrasse de plain-pied ne demande généralement pas d’autorisation. Une terrasse surélevée peut nécessiter une déclaration préalable en mairie : nous vérifions avec vous avant les travaux.' },
     ],

@@ -3,7 +3,7 @@ import Legal from '../layouts/Legal.astro';
 import { site } from '../config/site';
 ---
 <Legal title="Politique de confidentialité" description="Comment nous utilisons vos données personnelles.">
-  <p class="placeholder-note">TODO : faire relire cette page. Elle décrit le fonctionnement actuel du site (formulaire via Web3Forms, aucun cookie, aucun outil de mesure d’audience).</p>
+  <p class="placeholder-note">TODO : faire relire cette page, et la compléter (outils, cookies, durées) quand des tags de mesure seront activés dans Google Tag Manager, en même temps que la bannière de consentement.</p>
 
   <h2>Responsable du traitement</h2>
   <p>{site.legal.companyName}, {site.address.street && `${site.address.street}, `}{site.address.postalCode} {site.address.city} – {site.email}</p>
@@ -30,7 +30,10 @@ import { site } from '../config/site';
   </p>
 
   <h2>Cookies et mesure d’audience</h2>
-  <p>Ce site ne dépose aucun cookie et n’utilise aucun outil de mesure d’audience ni de publicité.</p>
+  <p>
+    Ce site utilise Google Tag Manager pour gérer d’éventuels outils de mesure d’audience. Aucun cookie de mesure
+    d’audience ou de publicité n’est déposé sans votre consentement préalable.
+  </p>
   <p>
     L’hébergeur (GitHub) peut enregistrer des journaux techniques (adresse IP) pour assurer la sécurité du service.
     Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité de GitHub</a>.

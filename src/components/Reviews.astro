@@ -1,22 +1,17 @@
 ---
 import { site } from '../config/site';
+import { reviews } from '../data/reviews';
 
 interface Props { count?: number }
 const { count = 3 } = Astro.props;
-// TODO : remplacer par de vrais avis Google copiés avec l'accord des clients (prénom + initiale).
-// Ne jamais inventer d'avis : c'est une pratique commerciale trompeuse.
-const reviews = Array.from({ length: count }, (_, i) => ({
-  text: `[Copier ici le texte d’un avis Google réel n° ${i + 1}]`,
-  author: '[Prénom N.]',
-  place: '[Commune]',
-}));
+const shown = reviews.slice(0, count);
 ---
 <div class="grid grid-3">
-  {reviews.map((r) => (
+  {shown.map((r) => (
     <figure class="review">
-      <div class="stars" aria-label="5 étoiles sur 5">★★★★★</div>
-      <blockquote>{r.text}</blockquote>
-      <figcaption class="small muted">{r.author} · {r.place}</figcaption>
+      <div class="stars" aria-label={`${r.rating} étoiles sur 5`}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</div>
+      <blockquote>{r.text.split('\n').map((line) => <p>{line}</p>)}</blockquote>
+      <figcaption class="small muted">{r.author} · avis Google, {r.date}</figcaption>
     </figure>
   ))}
 </div>

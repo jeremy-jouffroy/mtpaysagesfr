@@ -2,18 +2,18 @@
 import Base from './Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { ph } from '../scripts/utils';
+import { img, imgAlt } from '../scripts/utils';
 
 const { frontmatter } = Astro.props;
 const date = new Date(frontmatter.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
-<Base title={frontmatter.title} description={frontmatter.description} image={ph(frontmatter.image, 1200, 630)}>
+<Base title={frontmatter.title} description={frontmatter.description} image={img(frontmatter.image, 1200, 630)}>
   <PageHero title={frontmatter.title} lead={frontmatter.description} crumbs={[{ label: 'Conseils', href: 'conseils/' }]}>
     <p class="small muted" style="margin:0">Publié le {date}</p>
   </PageHero>
   <section class="section">
     <article class="container prose">
-      <img src={ph(frontmatter.image, 900, 500)} alt={frontmatter.image.replace(/\n/g, ' ')} width="900" height="500" style="border-radius:var(--radius);margin-bottom:2rem" />
+      <img src={img(frontmatter.image, 900, 500)} alt={imgAlt(frontmatter.image)} width="900" height="500" style="border-radius:var(--radius);margin-bottom:2rem" />
       <slot />
     </article>
   </section>

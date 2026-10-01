@@ -87,7 +87,7 @@ ul { padding-left: 1.2em; }
 .header-cta .btn { padding: 0.6rem 1.1rem; font-size: 0.95rem; }
 .nav-toggle { display: none; background: none; border: 0; padding: 0.5rem; cursor: pointer; color: var(--green-900); }
 
-@media (max-width: 1060px) {
+@media (max-width: 1200px) {
   .nav-toggle { display: block; }
   .header-cta .btn--outline { display: none; }
   .main-nav { display: none; position: absolute; inset: 68px 0 auto 0; background: var(--cream); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); }
@@ -159,7 +159,8 @@ a.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: in
 /* Galerie */
 .gallery { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 .gallery figure { margin: 0; }
-.gallery img { border-radius: var(--radius); width: 100%; }
+.gallery img { border-radius: var(--radius); width: 100%; aspect-ratio: 1; object-fit: cover; }
+.card > img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
 .gallery figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
 .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
 .filters button { border: 1px solid var(--border); background: var(--white); border-radius: 999px; padding: 0.45rem 1rem; cursor: pointer; font: inherit; font-size: 0.95rem; }
@@ -177,6 +178,13 @@ a.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); color: in
 .review { background: var(--white); border-radius: var(--radius); padding: 1.5rem; border: 1px solid var(--border); }
 .review .stars { color: #e0a526; letter-spacing: 2px; }
 .review blockquote { margin: 0.5rem 0; font-style: italic; }
+.review blockquote p { margin: 0 0 0.5em; }
+.footer-grid .social { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; gap: 1rem; }
+.social a { display: inline-flex; align-items: center; gap: 0.4rem; }
+.social svg { width: 20px; height: 20px; fill: currentColor; }
+.logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+.main-nav a, .header-cta .btn { white-space: nowrap; }
+.logo img { height: 42px; width: auto; }
 
 /* Bandeau CTA */
 .cta-band { background: var(--green-700); color: var(--white); border-radius: var(--radius); padding: clamp(2rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }

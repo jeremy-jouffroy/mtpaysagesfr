@@ -24,8 +24,13 @@ export const site = {
   gardensMaintained: '187',
 
   // Liens externes
-  googleReviewsUrl: '#', // TODO : lien vers la fiche Google
-  googleRating: null as null | { value: number; count: number }, // ex. { value: 4.9, count: 37 }
+  googleReviewsUrl: 'https://maps.app.goo.gl/xjpntUprkQQQGZGv5',
+  // Note et nombre d'avis Google, à mettre à jour quand de nouveaux avis arrivent (avis affichés : src/data/reviews.ts)
+  googleRating: { value: 5, count: 4 } as null | { value: number; count: number },
+  social: {
+    instagram: 'https://www.instagram.com/mtpaysages21/',
+    facebook: 'https://www.facebook.com/p/MTpaysages-61552213915124/',
+  },
 
   // Zone d'intervention
   radiusKm: 20,
@@ -85,6 +90,9 @@ export const site = {
     address: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis',
     url: 'https://github.com',
   },
+
+  // Google Tag Manager (laisser vide pour désactiver). Le dataLayer est documenté dans le README.
+  gtmId: 'GTM-T9QZ2VVP',
 
   // Formulaire : clé Web3Forms (gratuite sur https://web3forms.com, liée à l'email de réception).
   // Cette clé n'est pas secrète : elle peut figurer dans le code public.

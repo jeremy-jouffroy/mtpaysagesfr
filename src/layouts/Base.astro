@@ -18,6 +18,22 @@ const { title, description = site.description, image, faq, noindex = false } = A
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
+// Type de page pour le dataLayer (voir README, section « Tracking »)
+const path = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '').replace(/^\/|\/$/g, '');
+const pageType = (() => {
+  if (path === '') return 'home';
+  if (path === '404') return 'error_404';
+  if (path === 'devis') return 'quote_form';
+  if (path === 'merci') return 'thank_you';
+  if (/^(entretien-jardin|creation-amenagement)$/.test(path)) return 'service_category';
+  if (/^(entretien-jardin|creation-amenagement)\//.test(path) || path === 'elagage-abattage' || path === 'contrats-entretien') return 'service';
+  if (path.startsWith('jardinier-')) return 'city';
+  if (path === 'conseils') return 'blog';
+  if (path.startsWith('conseils/')) return 'article';
+  if (/^(mentions-legales|confidentialite|cgv)$/.test(path)) return 'legal';
+  return path; // contact, a-propos, realisations, avis, zone-intervention, credit-impot-50
+})();
+
 const localBusiness = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -38,6 +54,8 @@ const localBusiness = {
   areaServed: site.communes.map((name) => ({ '@type': 'City', name })),
   openingHours: site.openingHoursSpec,
   priceRange: '€€',
+  logo: new URL(url('images/logo-mt-paysages-paysagiste-entretien-creation.webp'), Astro.site).href,
+  sameAs: [site.googleReviewsUrl, site.social.instagram, site.social.facebook],
   ...(site.googleRating && {
     aggregateRating: { '@type': 'AggregateRating', ratingValue: site.googleRating.value, reviewCount: site.googleRating.count },
   }),
@@ -57,6 +75,29 @@ const faqSchema = faq?.length
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
+    <script is:inline define:vars={{ pageType, gtmId: site.gtmId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      // Consent Mode v2 : tout est refusé par défaut, en attendant une bannière de consentement (CMP).
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500,
+      });
+      dataLayer.push({ event: 'page_view', page_type: pageType, page_path: location.pathname, page_title: document.title });
+      if (gtmId) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', gtmId);
+      }
+    </script>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
@@ -69,11 +110,14 @@ const faqSchema = faq?.length
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    {image && <meta property="og:image" content={image} />}
+    {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
     <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   </head>
   <body>
+    {site.gtmId && (
+      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${site.gtmId}`} height="0" width="0" style="display:none;visibility:hidden" /></noscript>
+    )}
     <a href="#contenu" class="visually-hidden">Aller au contenu</a>
     <Header />
     <main id="contenu">
@@ -84,5 +128,9 @@ const faqSchema = faq?.length
       <a class="btn btn--outline" href={telHref(site.phone)}>📞 Appeler</a>
       <a class="btn btn--primary" href={url('devis/')}>Devis gratuit</a>
     </div>
+    <script>
+      import { initCtaTracking } from '../scripts/tracking';
+      initCtaTracking();
+    </script>
   </body>
 </html>

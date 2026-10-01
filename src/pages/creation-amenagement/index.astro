@@ -5,7 +5,7 @@ import ServiceCard from '../../components/ServiceCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { site } from '../../config/site';
 import { byCategory } from '../../data/services';
-import { ph } from '../../scripts/utils';
+import { img, imgAlt } from '../../scripts/utils';
 ---
 <Base title={`Création et aménagement de jardin à ${site.address.city}`} description={`Paysagiste à ${site.address.city} : création de massifs, pelouses, terrasses, allées, clôtures et arrosage automatique. Étude et devis gratuits.`}>
   <PageHero
@@ -23,7 +23,7 @@ import { ph } from '../../scripts/utils';
 
   <section class="section section--alt">
     <div class="container grid grid-2" style="align-items:center">
-      <img src={ph('Plan d’aménagement\nà côté du jardin réalisé', 700, 500)} alt="Plan d'aménagement paysager" loading="lazy" width="700" height="500" style="border-radius:var(--radius)" />
+      <img src={img('etapes-creation-massif-toile-paillage-mineral.webp')} alt={imgAlt('etapes-creation-massif-toile-paillage-mineral.webp')} loading="lazy" width="1200" height="1200" style="border-radius:var(--radius)" />
       <div>
         <span class="eyebrow">Notre méthode</span>
         <h2>De l’idée au jardin fini</h2>

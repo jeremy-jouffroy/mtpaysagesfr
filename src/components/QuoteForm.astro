@@ -102,6 +102,8 @@ const prestations = [
 </form>
 
 <script>
+  import { track, trackThen } from '../scripts/tracking';
+
   const form = document.getElementById('quote-form') as HTMLFormElement | null;
 
   if (form) {
@@ -138,8 +140,19 @@ const prestations = [
         });
         const json = await res.json();
         if (!json.success) throw new Error(json.message);
-        location.href = thanks;
+        trackThen(
+          {
+            event: 'generate_lead',
+            form_name: 'devis',
+            form_location: location.pathname,
+            services: form.querySelectorAll('input[name="Prestations"]:checked').length
+              ? [...form.querySelectorAll<HTMLInputElement>('input[name="Prestations"]:checked')].map((cb) => cb.value).join(', ')
+              : 'non précisé',
+          },
+          () => (location.href = thanks),
+        );
       } catch {
+        track({ event: 'form_error', form_name: 'devis', form_location: location.pathname });
         status.className = 'form-status err';
         status.textContent =
           'L’envoi a échoué. Merci de réessayer ou de nous contacter directement par téléphone ou par email.';

@@ -5,7 +5,7 @@ import Faq from '../components/Faq.astro';
 import Reviews from '../components/Reviews.astro';
 import { site } from '../config/site';
 import { byCategory } from '../data/services';
-import { url, ph, telHref } from '../scripts/utils';
+import { url, ph, img, imgAlt, telHref } from '../scripts/utils';
 
 const faq = [
   {
@@ -26,9 +26,9 @@ const faq = [
   },
 ];
 ---
-<Base title={`${site.name} – Jardinier paysagiste à ${site.address.city}`} faq={faq} image={ph('Jardin entretenu\npar MT Paysages', 1200, 630)}>
+<Base title={`${site.name} – Jardinier paysagiste à ${site.address.city}`} faq={faq} image={img('allee-pas-japonais-dalles-pelouse-jardin.webp')}>
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" data-cta-location="hero">
     <div class="container hero-grid">
       <div>
         {site.sap.enabled && <p><span class="badge">-50 % de crédit d’impôt sur l’entretien</span></p>}
@@ -47,7 +47,7 @@ const faq = [
           <li>Zéro pesticide</li>
         </ul>
       </div>
-      <img class="hero-img" src={ph('Photo principale :\njardin entretenu par MT Paysages', 900, 700)} alt="Jardin entretenu par MT Paysages" width="900" height="700" />
+      <img class="hero-img" src={img('allee-pas-japonais-dalles-pelouse-jardin.webp')} alt={imgAlt('allee-pas-japonais-dalles-pelouse-jardin.webp')} width="1200" height="1200" />
     </div>
   </section>
 
@@ -60,7 +60,7 @@ const faq = [
       </div>
       <div class="grid grid-2">
         <a class="card" href={url('entretien-jardin/')}>
-          <img src={ph('Jardinier taillant une haie', 800, 450)} alt="Taille de haie" width="800" height="450" loading="lazy" />
+          <img src={img('paysagiste-mt-paysages-taille-arbustes-secateur.webp')} alt={imgAlt('paysagiste-mt-paysages-taille-arbustes-secateur.webp')} width="800" height="450" loading="lazy" />
           <div class="card-body card-big">
             {site.sap.enabled && <p><span class="badge">-50 % crédit d’impôt</span></p>}
             <h3>Entretien de jardin</h3>
@@ -72,7 +72,7 @@ const faq = [
           </div>
         </a>
         <a class="card" href={url('creation-amenagement/')}>
-          <img src={ph('Terrasse bois et massifs\nnouvellement créés', 800, 450)} alt="Aménagement paysager" width="800" height="450" loading="lazy" />
+          <img src={img('creation-massif-arbustes-paillage-mineral-avant-apres.webp')} alt={imgAlt('creation-massif-arbustes-paillage-mineral-avant-apres.webp')} width="800" height="450" loading="lazy" />
           <div class="card-body card-big">
             <p><span class="badge badge--soft">Conception sur mesure</span></p>
             <h3>Création et aménagement</h3>
@@ -106,16 +106,16 @@ const faq = [
       </div>
       <div class="gallery">
         <figure>
-          <img src={ph('AVANT / APRÈS\nHaie de 40 m remise en forme', 600, 450)} alt="Avant / après taille de haie" loading="lazy" width="600" height="450" />
-          <figcaption>Taille d’une haie de 40 m · [Commune]</figcaption>
+          <img src={img('taille-arbustes-en-boule-entretien-jardin-avant-apres.webp')} alt={imgAlt('taille-arbustes-en-boule-entretien-jardin-avant-apres.webp')} loading="lazy" width="600" height="600" />
+          <figcaption>Taille d’arbustes en boule</figcaption>
         </figure>
         <figure>
-          <img src={ph('AVANT / APRÈS\nCréation d’un massif\net d’une allée', 600, 450)} alt="Avant / après création de massif" loading="lazy" width="600" height="450" />
-          <figcaption>Massif et allée en pas japonais · [Commune]</figcaption>
+          <img src={img('creation-terrain-petanque-terrasse-bois-avant-apres.webp')} alt={imgAlt('creation-terrain-petanque-terrasse-bois-avant-apres.webp')} loading="lazy" width="600" height="600" />
+          <figcaption>Terrain de pétanque et terrasse bois</figcaption>
         </figure>
         <figure>
-          <img src={ph('AVANT / APRÈS\nTerrain débroussaillé', 600, 450)} alt="Avant / après débroussaillage" loading="lazy" width="600" height="450" />
-          <figcaption>Remise en état d’un terrain · [Commune]</figcaption>
+          <img src={img('debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp')} alt={imgAlt('debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp')} loading="lazy" width="600" height="600" />
+          <figcaption>Débroussaillage de la cour d’un corps de ferme</figcaption>
         </figure>
       </div>
       <p style="margin-top:1.5rem"><a class="btn btn--outline" href={url('realisations/')}>Voir toutes nos réalisations</a></p>

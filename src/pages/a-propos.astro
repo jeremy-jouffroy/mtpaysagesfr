@@ -3,14 +3,14 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
-import { ph } from '../scripts/utils';
+import { img, imgAlt } from '../scripts/utils';
 ---
 <Base title="Qui sommes-nous" description={`${site.name}, entreprise de jardinage et paysage à ${site.address.city} : notre histoire, notre équipe et nos engagements.`}>
   <PageHero title="Qui sommes-nous ?" lead={`${site.name} est une entreprise locale de jardinage et d’aménagement paysager installée à ${site.address.city}.`} />
 
   <section class="section">
     <div class="container grid grid-2" style="align-items:center">
-      <img src={ph('Portrait du dirigeant\ndans un jardin', 700, 800)} alt={`${site.legal.director}, fondateur de ${site.name}`} width="700" height="800" style="border-radius:var(--radius)" />
+      <img src={img('paysagiste-mt-paysages-taille-arbustes-secateur.webp')} alt={`${site.legal.director}, fondateur de ${site.name}, en pleine taille d’arbustes`} width="1200" height="1310" style="border-radius:var(--radius)" />
       <div class="prose">
         <span class="eyebrow">Notre histoire</span>
         <h2>[Titre de l’histoire]</h2>
@@ -39,9 +39,13 @@ import { ph } from '../scripts/utils';
     <div class="container">
       <div class="section-head"><span class="eyebrow">L’équipe et le matériel</span><h2>Des professionnels bien équipés</h2></div>
       <div class="gallery">
-        <figure><img src={ph('Photo de l’équipe\nen tenue de travail', 600, 450)} alt="L'équipe" loading="lazy" width="600" height="450" /></figure>
-        <figure><img src={ph('Camion et remorque\nlogotés MT Paysages', 600, 450)} alt="Véhicule de l'entreprise" loading="lazy" width="600" height="450" /></figure>
-        <figure><img src={ph('Matériel professionnel :\ntondeuse, taille-haie, broyeur', 600, 450)} alt="Matériel professionnel" loading="lazy" width="600" height="450" /></figure>
+        {[
+          ['utilitaire-mt-paysages-motoculteur-creation-espaces-paysagers.webp', 'Notre utilitaire et le motoculteur'],
+          ['salon-paysalia-paysage-jardin-mt-paysages.webp', 'Au salon Paysalia, pour suivre les nouveautés du métier'],
+          ['article-presse-mt-paysages-paysagiste-saulon-la-rue.webp', 'MT Paysages dans la presse locale'],
+        ].map(([file, caption]) => (
+          <figure><img src={img(file)} alt={imgAlt(file)} loading="lazy" width="600" height="600" /><figcaption>{caption}</figcaption></figure>
+        ))}
       </div>
       <h3 style="margin-top:2.5rem">Qualifications et labels</h3>
       <p class="placeholder-note">TODO : afficher uniquement les qualifications réellement obtenues (logos et numéros) : déclaration SAP, adhésion Unep, label Qualipaysage, Certiphyto, diplômes.</p>
