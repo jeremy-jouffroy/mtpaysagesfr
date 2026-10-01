@@ -26,7 +26,7 @@ const faq = [
   },
 ];
 ---
-<Base title={`${site.name} – Jardinier paysagiste à ${site.address.city}`} faq={faq} image={ph('Jardin entretenu\npar MT Paysage', 1200, 630)}>
+<Base title={`${site.name} – Jardinier paysagiste à ${site.address.city}`} faq={faq} image={ph('Jardin entretenu\npar MT Paysages', 1200, 630)}>
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
@@ -47,7 +47,7 @@ const faq = [
           <li>Zéro pesticide</li>
         </ul>
       </div>
-      <img class="hero-img" src={ph('Photo principale :\njardin entretenu par MT Paysage', 900, 700)} alt="Jardin entretenu par MT Paysage" width="900" height="700" />
+      <img class="hero-img" src={ph('Photo principale :\njardin entretenu par MT Paysages', 900, 700)} alt="Jardin entretenu par MT Paysages" width="900" height="700" />
     </div>
   </section>
 
@@ -91,7 +91,7 @@ const faq = [
   <section class="section section--green">
     <div class="container stats">
       <div class="stat"><strong>{site.yearsExperience} ans</strong><span>d’expérience</span></div>
-      <div class="stat"><strong>[XXX]</strong><span>jardins entretenus</span></div>
+      <div class="stat"><strong>{site.gardensMaintained}</strong><span>jardins entretenus</span></div>
       <div class="stat"><strong>{site.googleRating ? `${site.googleRating.value}/5` : '[4,9/5]'}</strong><span>sur Google</span></div>
       <div class="stat"><strong>48 h</strong><span>pour recevoir votre devis</span></div>
     </div>

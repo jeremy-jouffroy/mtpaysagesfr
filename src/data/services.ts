@@ -23,7 +23,7 @@ export const services: Service[] = [
     title: 'Tonte de pelouse',
     h1: 'Tonte de pelouse et entretien du gazon',
     metaDescription:
-      "Tonte de pelouse régulière ou ponctuelle à [Ville] et alentours. Ramassage de l'herbe inclus, 50 % de crédit d'impôt.",
+      "Tonte de pelouse régulière ou ponctuelle à Saulon-la-Rue et alentours. Ramassage de l'herbe inclus, 50 % de crédit d'impôt.",
     intro:
       "Une pelouse dense et nette demande une tonte régulière pendant toute la saison de pousse. Nous passons à la fréquence qui convient à votre terrain et repartons avec l'herbe coupée.",
     includes: [
@@ -35,7 +35,7 @@ export const services: Service[] = [
     ],
     frequency: 'Toutes les 2 à 3 semaines de mars à octobre, à la demande ou par contrat.',
     sapEligible: true,
-    images: ['Pelouse fraîchement tondue\navec bordures nettes', 'Jardinier MT Paysage\nen train de tondre', 'Avant / après\ntonte d’une pelouse'],
+    images: ['Pelouse fraîchement tondue\navec bordures nettes', 'Jardinier MT Paysages\nen train de tondre', 'Avant / après\ntonte d’une pelouse'],
     faq: [
       { q: 'À quelle hauteur faut-il tondre ?', a: "Entre 5 et 7 cm en général, un peu plus haut en été pour limiter le dessèchement. Nous adaptons la hauteur à la saison et à l'exposition." },
       { q: 'Faut-il être présent pendant l’intervention ?', a: 'Non. Il suffit que le jardin soit accessible. Nous vous prévenons la veille et vous envoyons un message une fois le travail terminé.' },
@@ -47,7 +47,7 @@ export const services: Service[] = [
     title: 'Taille de haies et arbustes',
     h1: 'Taille de haies, d’arbustes et de petits arbres',
     metaDescription:
-      "Taille de haies et d'arbustes à [Ville] : coupe nette, ramassage et évacuation des déchets verts. 50 % de crédit d'impôt.",
+      "Taille de haies et d'arbustes à Saulon-la-Rue : coupe nette, ramassage et évacuation des déchets verts. 50 % de crédit d'impôt.",
     intro:
       'Une haie bien taillée reste dense, saine et à la bonne hauteur. Nous taillons haies, arbustes et petits arbres en respectant la période de taille de chaque espèce et la période de nidification des oiseaux.',
     includes: [
@@ -70,7 +70,7 @@ export const services: Service[] = [
     title: 'Désherbage',
     h1: 'Désherbage manuel et écologique',
     metaDescription:
-      "Désherbage sans produits chimiques des massifs, allées et terrasses à [Ville]. 50 % de crédit d'impôt.",
+      "Désherbage sans produits chimiques des massifs, allées et terrasses à Saulon-la-Rue. 50 % de crédit d'impôt.",
     intro:
       "Nous désherbons sans pesticides, à la main et avec des outils mécaniques ou thermiques. C'est meilleur pour votre sol et vos animaux, et c'est conforme à la loi Labbé.",
     includes: [
@@ -92,7 +92,7 @@ export const services: Service[] = [
     title: 'Ramassage des feuilles',
     h1: 'Ramassage des feuilles et nettoyage d’automne',
     metaDescription:
-      "Ramassage des feuilles mortes et nettoyage de jardin à l'automne à [Ville]. Évacuation incluse, 50 % de crédit d'impôt.",
+      "Ramassage des feuilles mortes et nettoyage de jardin à l'automne à Saulon-la-Rue. Évacuation incluse, 50 % de crédit d'impôt.",
     intro:
       "Les feuilles laissées sur la pelouse l'étouffent et rendent les allées glissantes. Nous nettoyons le jardin à l'automne et le préparons pour l'hiver.",
     includes: [
@@ -114,7 +114,7 @@ export const services: Service[] = [
     title: 'Débroussaillage',
     h1: 'Débroussaillage et remise en état de terrain',
     metaDescription:
-      "Débroussaillage de terrain envahi ou débroussaillage obligatoire (OLD) à [Ville]. 50 % de crédit d'impôt.",
+      "Débroussaillage de terrain envahi ou débroussaillage obligatoire (OLD) à Saulon-la-Rue. 50 % de crédit d'impôt.",
     intro:
       'Terrain laissé à l’abandon, ronces ou friche : nous dégageons et remettons en état votre terrain. Nous réalisons aussi le débroussaillement obligatoire (OLD) dans les zones exposées aux incendies.',
     includes: [
@@ -138,7 +138,7 @@ export const services: Service[] = [
     title: 'Plantations et massifs',
     h1: 'Création de massifs et plantations',
     metaDescription:
-      "Création de massifs, haies et plantations adaptées à votre sol et à votre climat à [Ville]. Conseil et devis gratuit.",
+      "Création de massifs, haies et plantations adaptées à votre sol et à votre climat à Saulon-la-Rue. Conseil et devis gratuit.",
     intro:
       'Nous choisissons des végétaux adaptés à votre sol, à votre exposition et au temps que vous voulez consacrer au jardin. Nous privilégions les essences locales et économes en eau.',
     includes: [
@@ -159,7 +159,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Engazonnement',
     h1: 'Création de pelouse : semis ou gazon en rouleau',
-    metaDescription: "Création ou rénovation de pelouse par semis ou gazon en rouleau à [Ville]. Préparation du sol incluse.",
+    metaDescription: "Création ou rénovation de pelouse par semis ou gazon en rouleau à Saulon-la-Rue. Préparation du sol incluse.",
     intro:
       'Pour une pelouse neuve ou rénovée, tout se joue dans la préparation du sol. Nous vous conseillons entre semis et gazon en rouleau selon votre budget et vos délais.',
     includes: [
@@ -179,7 +179,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Terrasses et allées',
     h1: 'Terrasses, allées et bordures',
-    metaDescription: 'Création de terrasses bois ou dalles, allées en pavés ou gravier et bordures à [Ville]. Devis gratuit.',
+    metaDescription: 'Création de terrasses bois ou dalles, allées en pavés ou gravier et bordures à Saulon-la-Rue. Devis gratuit.',
     intro:
       'Une terrasse ou une allée structure le jardin et le rend plus pratique au quotidien. Nous les réalisons en bois, en dalles, en pavés ou en matériaux drainants.',
     includes: [
@@ -199,7 +199,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Clôtures et brise-vue',
     h1: 'Clôtures, portillons et brise-vue',
-    metaDescription: 'Pose de clôtures, panneaux brise-vue et portillons à [Ville]. Devis gratuit.',
+    metaDescription: 'Pose de clôtures, panneaux brise-vue et portillons à Saulon-la-Rue. Devis gratuit.',
     intro: 'Délimiter votre terrain ou vous protéger des regards : nous installons clôtures rigides, panneaux bois ou composite, ganivelles et haies végétales.',
     includes: [
       'Clôture en panneaux rigides ou grillage',
@@ -218,7 +218,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Arrosage automatique',
     h1: 'Installation d’arrosage automatique',
-    metaDescription: "Installation d'arrosage automatique enterré et goutte-à-goutte à [Ville]. Économisez l'eau.",
+    metaDescription: "Installation d'arrosage automatique enterré et goutte-à-goutte à Saulon-la-Rue. Économisez l'eau.",
     intro: 'Un arrosage bien réglé arrose au bon moment et à la bonne dose. Il vous fait gagner du temps et consomme moins d’eau qu’un arrosage manuel.',
     includes: [
       'Étude du jardin et conception du réseau',

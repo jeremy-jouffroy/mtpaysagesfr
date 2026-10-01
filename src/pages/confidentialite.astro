@@ -6,7 +6,7 @@ import { site } from '../config/site';
   <p class="placeholder-note">TODO : faire relire cette page. Elle décrit le fonctionnement actuel du site (formulaire via Web3Forms, aucun cookie, aucun outil de mesure d’audience).</p>
 
   <h2>Responsable du traitement</h2>
-  <p>{site.legal.companyName}, {site.address.street}, {site.address.postalCode} {site.address.city} – {site.email}</p>
+  <p>{site.legal.companyName}, {site.address.street && `${site.address.street}, `}{site.address.postalCode} {site.address.city} – {site.email}</p>
 
   <h2>Données collectées et finalité</h2>
   <p>

@@ -4,23 +4,24 @@
 // ─────────────────────────────────────────────────────────────
 
 export const site = {
-  name: 'MT Paysage',
+  name: 'MT Paysages',
   tagline: 'Jardinier & paysagiste',
   description:
-    "MT Paysage, jardinier paysagiste à [Ville] : entretien de jardin avec 50 % de crédit d'impôt, création et aménagement d'espaces verts. Devis gratuit.",
+    "MT Paysages, jardinier paysagiste à Saulon-la-Rue : entretien de jardin avec 50 % de crédit d'impôt, création et aménagement d'espaces verts. Devis gratuit.",
 
   // Coordonnées (doivent être identiques à la fiche Google Business Profile)
-  phone: '06 00 00 00 00', // TODO
-  email: 'contact@exemple.fr', // TODO
+  phone: '06 20 77 78 17',
+  email: 'mtpaysages21@gmail.com',
   address: {
-    street: '[Adresse]',
-    postalCode: '[00000]',
-    city: '[Ville]',
-    region: '[Région]',
+    street: '1 impasse du Parc',
+    postalCode: '21910',
+    city: 'Saulon-la-Rue',
+    region: 'Bourgogne-Franche-Comté',
   },
-  hours: 'Lundi – vendredi : 8h – 18h · Samedi sur rendez-vous',
-  openingHoursSpec: ['Mo-Fr 08:00-18:00'],
-  yearsExperience: '[X]',
+  hours: 'Lundi et mardi : 8h – 18h',
+  openingHoursSpec: ['Mo-Tu 08:00-18:00'],
+  yearsExperience: '3',
+  gardensMaintained: '187',
 
   // Liens externes
   googleReviewsUrl: '#', // TODO : lien vers la fiche Google
@@ -28,11 +29,34 @@ export const site = {
 
   // Zone d'intervention
   radiusKm: 20,
-  communes: ['[Commune 1]', '[Commune 2]', '[Commune 3]', '[Commune 4]', '[Commune 5]', '[Commune 6]', '[Commune 7]', '[Commune 8]'],
+  // Communes à 20 km maximum (centre à centre) de Saulon-la-Rue, triées par distance.
+  // Source : geo.api.gouv.fr. Les premières servent dans les descriptions et la FAQ.
+  communes: [
+    'Barges', 'Fénay', 'Saulon-la-Chapelle', 'Broindon', 'Saint-Philibert', 'Bretenière', 'Perrigny-lès-Dijon',
+    'Ouges', 'Gevrey-Chambertin', 'Savouges', 'Noiron-sous-Gevrey', 'Épernay-sous-Gevrey', 'Brochon', 'Longvic',
+    'Rouvres-en-Plaine', 'Corcelles-lès-Cîteaux', 'Thorey-en-Plaine', 'Neuilly-Crimolois', 'Fixin',
+    'Gilly-lès-Cîteaux', 'Morey-Saint-Denis', 'Couchey', 'Saint-Bernard', 'Marsannay-la-Côte',
+    'Longecourt-en-Plaine', 'Chenôve', 'Sennecey-lès-Dijon', 'Fauverney', 'Chambolle-Musigny', 'Izeure', 'Vougeot',
+    'Flagey-Echézeaux', 'Villebichot', 'Marliens', 'Chevigny-Saint-Sauveur', 'Vosne-Romanée', 'Magny-sur-Tille',
+    'Saint-Nicolas-lès-Cîteaux', 'Boncourt-le-Bois', 'Aiserey', 'Varanges', 'Curley', 'Chambœuf', 'Quetigny',
+    'Bessey-lès-Cîteaux', 'Flavignerot', 'Corcelles-les-Monts', 'Nuits-Saint-Georges', 'Dijon', 'Reulle-Vergy',
+    'Agencourt', 'Échigey', 'Izier', 'Saint-Apollinaire', 'Genlis', 'Tart', 'Talant', 'Tart-le-Bas', 'Curtil-Vergy',
+    'Bressey-sur-Tille', 'Fontaine-lès-Dijon', 'Aubigny-en-Plaine', 'Couternon', 'Gerland', 'Segrois',
+    'Velars-sur-Ouche', "L'Étang-Vergy", 'Valforêt', 'Villars-Fontaine', 'Quincey', 'Plombières-lès-Dijon',
+    'Cessey-sur-Tille', 'Longeault-Pluvault', 'Labergement-Foigney', 'Semezanges', 'Magny-lès-Aubigny',
+    'Varois-et-Chaignot', 'Brazey-en-Plaine', 'Chaux', 'Messanges', 'Ruffey-lès-Echirey', 'Beire-le-Fort', 'Urcy',
+    'Ahuy', 'Premeaux-Prissey', 'Charrey-sur-Saône', 'Meuilley', 'Broin', 'Daix', 'Pluvet', 'Montot',
+    'Fleurey-sur-Ouche', 'Ternant', 'Remilly-sur-Tille', 'Bévy', 'Comblanchien', 'Orgeux', 'Arc-sur-Tille',
+    'Bellefond', 'Bonnencontre', 'Collonges-lès-Bévy', 'Hauteville-lès-Dijon', 'Arcey', 'Asnières-lès-Dijon',
+    'Argilly', 'Chevannes', 'Gergueil', 'Collonges-et-Premières', 'Villers-la-Faye', 'Tréclun', 'Corgoloin',
+    'Marey-lès-Fussey', 'Trouhans', 'Arcenant', 'Longchamp', 'Soirans', 'Esbarres', 'Chambeire',
+    'Auvillars-sur-Saône', 'Lantenay', 'Champdôtre', 'Bretigny', 'Magny-lès-Villers', 'Binges', 'Bagnot',
+    'Sainte-Marie-sur-Ouche', 'Norges-la-Ville', 'Prenois',
+  ],
   // Communes qui ont leur propre page « jardinier-[commune] ». N'en créer que si vous avez
   // du contenu réel à y mettre (chantiers, photos, avis locaux) : des pages identiques nuisent au référencement.
   cityPages: [
-    { name: '[Ville]', intro: '[2–3 phrases propres à cette commune : quartiers, type de jardins, chantiers récents.]' },
+    { name: 'Saulon-la-Rue', intro: '[2–3 phrases propres à cette commune : quartiers, type de jardins, chantiers récents.]' },
     { name: '[Commune 1]', intro: '[2–3 phrases propres à cette commune.]' },
     { name: '[Commune 2]', intro: '[2–3 phrases propres à cette commune.]' },
   ],
@@ -46,13 +70,13 @@ export const site = {
 
   // Informations légales
   legal: {
-    companyName: 'MT Paysage', // raison sociale exacte
-    legalForm: '[EI / SARL / SAS…]',
-    capital: '[montant]',
-    siret: '[000 000 000 00000]',
-    registry: '[RCS / RM de …]',
-    vat: '[FR00000000000]',
-    director: '[Nom du dirigeant]',
+    companyName: 'MT PAYSAGES', // raison sociale exacte (registre)
+    legalForm: 'SAS',
+    capital: '1 000 €',
+    siret: '978 977 866 00018',
+    registry: 'RCS Dijon 978 977 866',
+    vat: 'FR08978977866',
+    director: 'Thomas Michon',
     insurer: '[Nom de l’assureur – RC Pro / décennale]',
     mediator: { name: '[Nom du médiateur de la consommation]', url: '#' },
   },
@@ -64,7 +88,7 @@ export const site = {
 
   // Formulaire : clé Web3Forms (gratuite sur https://web3forms.com, liée à l'email de réception).
   // Cette clé n'est pas secrète : elle peut figurer dans le code public.
-  web3formsKey: 'YOUR_ACCESS_KEY_HERE', // TODO
+  web3formsKey: 'e1c752e4-8b67-4131-86c4-25c5ea9f5726',
 };
 
 export const nav = [

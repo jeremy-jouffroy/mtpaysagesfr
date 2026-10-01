@@ -29,7 +29,7 @@ const localBusiness = {
   email: site.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: site.address.street,
+    streetAddress: site.address.street || undefined,
     postalCode: site.address.postalCode,
     addressLocality: site.address.city,
     addressRegion: site.address.region,

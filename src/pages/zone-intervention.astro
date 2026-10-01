@@ -5,7 +5,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
 import { url, ph, slugify } from '../scripts/utils';
 ---
-<Base title={`Zone d’intervention : ${site.address.city} et alentours`} description={`MT Paysage intervient à ${site.address.city} et dans un rayon de ${site.radiusKm} km : ${site.communes.slice(0, 6).join(', ')}…`}>
+<Base title={`Zone d’intervention : ${site.address.city} et alentours`} description={`MT Paysages intervient à ${site.address.city} et dans un rayon de ${site.radiusKm} km : ${site.communes.slice(0, 6).join(', ')}…`}>
   <PageHero title="Zone d’intervention" lead={`Nous intervenons à ${site.address.city} et dans toutes les communes situées à environ ${site.radiusKm} km.`} />
   <section class="section">
     <div class="container grid grid-2">

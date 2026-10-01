@@ -8,7 +8,7 @@ const l = site.legal;
   <h2>Éditeur du site</h2>
   <p>
     {l.companyName}, {l.legalForm}{l.capital && <> au capital de {l.capital}</>}<br />
-    Siège : {site.address.street}, {site.address.postalCode} {site.address.city}<br />
+    Siège : {site.address.street && `${site.address.street}, `}{site.address.postalCode} {site.address.city}<br />
     SIRET : {l.siret} · {l.registry}<br />
     N° TVA intracommunautaire : {l.vat}<br />
     {site.sap.enabled && <>Déclaration services à la personne : n° {site.sap.number}<br /></>}

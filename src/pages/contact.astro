@@ -22,7 +22,7 @@ import { telHref } from '../scripts/utils';
           </p>
           <p>
             <strong>Adresse :</strong><br />
-            {site.address.street}<br />
+            {site.address.street && <>{site.address.street}<br /></>}
             {site.address.postalCode} {site.address.city}
           </p>
           <p class="small muted">{site.hours}</p>

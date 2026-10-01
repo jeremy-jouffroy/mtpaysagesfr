@@ -1,6 +1,6 @@
 # mtpaysagesfr
 
-Site vitrine de l'entreprise MT Paysage (jardinier paysagiste). Site statique [Astro](https://astro.build), hébergé sur GitHub Pages.
+Site vitrine de l'entreprise MT Paysages (jardinier paysagiste). Site statique [Astro](https://astro.build), hébergé sur GitHub Pages.
 
 ## Développement
 
