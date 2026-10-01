@@ -5,5 +5,5 @@ dist/
 .env
 
 # Photos originales (les versions optimisées sont dans public/images/) et export brut des avis Google
-images/
-reviews/
+/images/
+/reviews/
