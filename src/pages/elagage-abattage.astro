@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
-import { url, ph } from '../scripts/utils';
+import { url, img, imgAlt } from '../scripts/utils';
 
 // TODO : supprimer cette page (et ses liens) si l'entreprise ne propose pas l'élagage.
 const faq = [
@@ -29,7 +29,8 @@ const faq = [
         <p class="muted small">Toutes nos interventions sont couvertes par notre assurance responsabilité civile professionnelle.</p>
         <a class="btn btn--primary" href={url('devis/?prestation=' + encodeURIComponent('Élagage / abattage'))}>Demander un devis</a>
       </div>
-      <img src={ph('Élagueur encordé\ndans un grand arbre', 700, 520)} alt="Élagage d'un arbre" loading="lazy" width="700" height="520" style="border-radius:var(--radius)" />
+      {/* TODO : remplacer par une photo d'élagage réelle (ajouter dans src/data/photos.ts). */}
+      <img src={img('arrachage-haie-thuyas-nettoyage-jardin-avant-apres.webp')} alt={imgAlt('arrachage-haie-thuyas-nettoyage-jardin-avant-apres.webp')} loading="lazy" width="1200" height="1200" style="border-radius:var(--radius)" />
     </div>
   </section>
   <section class="section section--alt">

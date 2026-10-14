@@ -1,3 +1,5 @@
+import { isFile } from '../scripts/utils';
+
 export type Faq = { q: string; a: string };
 
 export type Service = {
@@ -11,7 +13,7 @@ export type Service = {
   frequency?: string;
   priceFrom?: string; // ex. "35 € / h" — laisser vide pour afficher « Sur devis »
   sapEligible: boolean;
-  images: string[]; // photos (src/data/photos.ts) ou descriptions des photos attendues
+  images: string[]; // photos (src/data/photos.ts) ou descriptions des photos attendues (non affichées)
   faq: Faq[];
 };
 
@@ -74,7 +76,7 @@ export const services: Service[] = [
     title: 'Désherbage',
     h1: 'Désherbage manuel et écologique',
     metaDescription:
-      "Désherbage sans produits chimiques des massifs, allées et terrasses à Saulon-la-Rue. 50 % de crédit d'impôt.",
+      "Désherbage manuel, mécanique ou thermique, sans produits chimiques, des massifs, allées et terrasses à Saulon-la-Rue. 50 % de crédit d'impôt.",
     intro:
       "Nous désherbons sans pesticides, à la main et avec des outils mécaniques ou thermiques. C'est meilleur pour votre sol et vos animaux, et c'est conforme à la loi Labbé.",
     includes: [
@@ -118,7 +120,7 @@ export const services: Service[] = [
     title: 'Débroussaillage',
     h1: 'Débroussaillage et remise en état de terrain',
     metaDescription:
-      "Débroussaillage de terrain envahi ou débroussaillage obligatoire (OLD) à Saulon-la-Rue. 50 % de crédit d'impôt.",
+      "Débroussaillage de terrain envahi, ronces et friches, ou débroussaillement obligatoire (OLD) à Saulon-la-Rue et alentours. 50 % de crédit d'impôt.",
     intro:
       'Terrain laissé à l’abandon, ronces ou friche : nous dégageons et remettons en état votre terrain. Nous réalisons aussi le débroussaillement obligatoire (OLD) dans les zones exposées aux incendies.',
     includes: [
@@ -172,7 +174,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Engazonnement',
     h1: 'Création de pelouse : semis ou gazon en rouleau',
-    metaDescription: "Création ou rénovation de pelouse par semis ou gazon en rouleau à Saulon-la-Rue. Préparation du sol incluse.",
+    metaDescription: "Création ou rénovation de pelouse par semis ou gazon en rouleau à Saulon-la-Rue et autour de Dijon. Préparation du sol et première tonte incluses.",
     intro:
       'Pour une pelouse neuve ou rénovée, tout se joue dans la préparation du sol. Nous vous conseillons entre semis et gazon en rouleau selon votre budget et vos délais.',
     includes: [
@@ -192,7 +194,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Terrasses et allées',
     h1: 'Terrasses, allées et bordures',
-    metaDescription: 'Création de terrasses bois ou dalles, allées en pavés ou gravier et bordures à Saulon-la-Rue. Devis gratuit.',
+    metaDescription: 'Création de terrasses bois ou dalles, allées en pavés ou gravier, bordures et pas japonais à Saulon-la-Rue et autour de Dijon. Devis gratuit.',
     intro:
       'Une terrasse ou une allée structure le jardin et le rend plus pratique au quotidien. Nous les réalisons en bois, en dalles, en pavés ou en matériaux drainants.',
     includes: [
@@ -217,7 +219,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Clôtures et brise-vue',
     h1: 'Clôtures, portillons et brise-vue',
-    metaDescription: 'Pose de clôtures, panneaux brise-vue et portillons à Saulon-la-Rue. Devis gratuit.',
+    metaDescription: 'Pose de clôtures rigides, panneaux brise-vue bois ou composite, ganivelles et portillons à Saulon-la-Rue et autour de Dijon. Devis gratuit.',
     intro: 'Délimiter votre terrain ou vous protéger des regards : nous installons clôtures rigides, panneaux bois ou composite, ganivelles et haies végétales.',
     includes: [
       'Clôture en panneaux rigides ou grillage',
@@ -236,7 +238,7 @@ export const services: Service[] = [
     category: 'creation',
     title: 'Arrosage automatique',
     h1: 'Installation d’arrosage automatique',
-    metaDescription: "Installation d'arrosage automatique enterré et goutte-à-goutte à Saulon-la-Rue. Économisez l'eau.",
+    metaDescription: "Installation d'arrosage automatique enterré et goutte-à-goutte à Saulon-la-Rue et autour de Dijon : programmateur, sonde de pluie, moins d'eau consommée.",
     intro: 'Un arrosage bien réglé arrose au bon moment et à la bonne dose. Il vous fait gagner du temps et consomme moins d’eau qu’un arrosage manuel.',
     includes: [
       'Étude du jardin et conception du réseau',
@@ -254,3 +256,13 @@ export const services: Service[] = [
 ];
 
 export const byCategory = (c: Service['category']) => services.filter((s) => s.category === c);
+
+/** Photos réelles d'une prestation : les descriptions de photos attendues ne sont jamais publiées. */
+export const servicePhotos = (s: Service) => s.images.filter(isFile);
+
+// Photo de couverture tant qu'une prestation n'a pas encore de photo réelle
+const FALLBACK_COVER: Record<Service['category'], string> = {
+  entretien: 'taille-arbustes-en-boule-entretien-jardin-avant-apres.webp',
+  creation: 'etapes-creation-massif-toile-paillage-mineral.webp',
+};
+export const serviceCover = (s: Service) => servicePhotos(s)[0] ?? FALLBACK_COVER[s.category];

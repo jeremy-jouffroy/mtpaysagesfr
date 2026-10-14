@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/Article.astro
 title: "Obligation légale de débroussaillement : êtes-vous concerné ?"
-description: Qui doit débroussailler, sur quelle distance, et ce que vous risquez si vous ne le faites pas.
+description: "Obligation légale de débroussaillement (OLD) : qui doit débroussailler, sur quelle distance autour de la maison, et quelles sanctions en cas d’oubli."
 date: 2026-08-20
 image: debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp
 ---

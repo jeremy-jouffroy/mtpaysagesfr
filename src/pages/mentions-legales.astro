@@ -1,17 +1,17 @@
 ---
 import Legal from '../layouts/Legal.astro';
 import { site } from '../config/site';
-import { url } from '../scripts/utils';
+import { url, isFilled } from '../scripts/utils';
 const l = site.legal;
 ---
-<Legal title="Mentions légales" description={`Mentions légales du site ${site.name}.`}>
+<Legal title="Mentions légales" description={`Mentions légales du site ${site.name} : éditeur, siège à ${site.address.city}, SIRET, hébergeur, assurance professionnelle et médiation de la consommation.`}>
   <h2>Éditeur du site</h2>
   <p>
     {l.companyName}, {l.legalForm}{l.capital && <> au capital de {l.capital}</>}<br />
     Siège : {site.address.street && `${site.address.street}, `}{site.address.postalCode} {site.address.city}<br />
     SIRET : {l.siret} · {l.registry}<br />
     N° TVA intracommunautaire : {l.vat}<br />
-    {site.sap.enabled && <>Déclaration services à la personne : n° {site.sap.number}<br /></>}
+    {site.sap.enabled && isFilled(site.sap.number) && <>Déclaration services à la personne : n° {site.sap.number}<br /></>}
     Téléphone : {site.phone} · Email : {site.email}
   </p>
   <p>Directeur de la publication : {l.director}</p>

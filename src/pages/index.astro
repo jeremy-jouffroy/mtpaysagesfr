@@ -5,7 +5,7 @@ import Faq from '../components/Faq.astro';
 import Reviews from '../components/Reviews.astro';
 import { site } from '../config/site';
 import { byCategory } from '../data/services';
-import { url, ph, img, imgAlt, telHref } from '../scripts/utils';
+import { url, img, imgAlt, telHref } from '../scripts/utils';
 
 const faq = [
   {
@@ -18,7 +18,7 @@ const faq = [
   },
   {
     q: 'Dans quelles communes intervenez-vous ?',
-    a: `À ${site.address.city} et dans un rayon d’environ ${site.radiusKm} km : ${site.communes.slice(0, 5).join(', ')}…`,
+    a: `À ${site.address.city} et dans un rayon d’environ ${site.radiusKm} km : ${site.communes.slice(0, 5).map((c) => c.name).join(', ')}…`,
   },
   {
     q: 'Évacuez-vous les déchets verts ?',
@@ -47,7 +47,7 @@ const faq = [
           <li>Zéro pesticide</li>
         </ul>
       </div>
-      <img class="hero-img" src={img('allee-pas-japonais-dalles-pelouse-jardin.webp')} alt={imgAlt('allee-pas-japonais-dalles-pelouse-jardin.webp')} width="1200" height="1200" />
+      <img class="hero-img" fetchpriority="high" src={img('allee-pas-japonais-dalles-pelouse-jardin.webp')} alt={imgAlt('allee-pas-japonais-dalles-pelouse-jardin.webp')} width="1200" height="1200" />
     </div>
   </section>
 
@@ -156,11 +156,12 @@ const faq = [
         <span class="eyebrow">Zone d’intervention</span>
         <h2>À {site.address.city} et dans un rayon de {site.radiusKm} km</h2>
         <ul class="communes">
-          {site.communes.map((c) => <li>📍 {c}</li>)}
+          {site.communes.slice(0, 20).map((c) => <li>📍 {c.name}</li>)}
         </ul>
+        <p class="muted small">… et {site.communes.length - 20} autres communes, dont Dijon, Chenôve, Longvic et Nuits-Saint-Georges.</p>
         <a href={url('zone-intervention/')}>Voir toute la zone d’intervention →</a>
       </div>
-      <img src={ph(`Carte de la zone\nautour de ${site.address.city}`, 700, 500)} alt="Carte de la zone d’intervention" loading="lazy" width="700" height="500" style="border-radius:var(--radius)" />
+      <img src={url('images/carte-zone-intervention-saulon-la-rue.svg')} alt={`Carte de la zone d’intervention : ${site.radiusKm} km autour de ${site.address.city}, de Dijon à Nuits-Saint-Georges et Genlis`} loading="lazy" width="700" height="600" style="border-radius:var(--radius)" />
     </div>
   </section>
 

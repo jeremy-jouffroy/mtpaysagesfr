@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../config/site';
-import { url, telHref } from '../scripts/utils';
+import { url, img, telHref } from '../scripts/utils';
 import type { Faq } from '../data/services';
 
 interface Props {
@@ -12,10 +12,15 @@ interface Props {
   image?: string;
   faq?: Faq[];
   noindex?: boolean;
+  jsonLd?: Record<string, unknown>; // données structurées propres à la page (ex. Article)
+  ogType?: 'website' | 'article';
 }
 
-const { title, description = site.description, image, faq, noindex = false } = Astro.props;
-const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const DEFAULT_IMAGE = img('allee-pas-japonais-dalles-pelouse-jardin.webp');
+const { title, description = site.description, image = DEFAULT_IMAGE, faq, noindex = false, jsonLd, ogType = 'website' } = Astro.props;
+// Google tronque au-delà d'environ 60–65 caractères : on n'ajoute le nom de l'entreprise que s'il tient.
+const suffixed = `${title} | ${site.name}`;
+const fullTitle = title.includes(site.name) || suffixed.length > 65 ? title : suffixed;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 // Type de page pour le dataLayer (voir README, section « Tracking »)
@@ -36,13 +41,14 @@ const pageType = (() => {
 
 const localBusiness = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'HomeAndConstructionBusiness',
   '@id': new URL(url('/'), Astro.site).href + '#entreprise',
   name: site.name,
   description: site.description,
   url: new URL(url('/'), Astro.site).href,
   telephone: telHref(site.phone).replace('tel:', ''),
   email: site.email,
+  image: new URL(DEFAULT_IMAGE, Astro.site).href,
   address: {
     '@type': 'PostalAddress',
     streetAddress: site.address.street || undefined,
@@ -51,14 +57,16 @@ const localBusiness = {
     addressRegion: site.address.region,
     addressCountry: 'FR',
   },
-  areaServed: site.communes.map((name) => ({ '@type': 'City', name })),
+  geo: { '@type': 'GeoCoordinates', ...site.address.geo },
+  areaServed: {
+    '@type': 'GeoCircle',
+    geoMidpoint: { '@type': 'GeoCoordinates', ...site.address.geo },
+    geoRadius: site.radiusKm * 1000,
+  },
   openingHours: site.openingHoursSpec,
   priceRange: '€€',
   logo: new URL(url('images/logo-mt-paysages-paysagiste-entretien-creation.webp'), Astro.site).href,
   sameAs: [site.googleReviewsUrl, site.social.instagram, site.social.facebook],
-  ...(site.googleRating && {
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: site.googleRating.value, reviewCount: site.googleRating.count },
-  }),
 };
 
 const faqSchema = faq?.length
@@ -104,15 +112,17 @@ const faqSchema = faq?.length
     <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
     <link rel="sitemap" href={url('sitemap-index.xml')} />
     <meta name="theme-color" content="#1f3a1d" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+    <meta property="og:image" content={new URL(image, Astro.site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...jsonLd })} />}
   </head>
   <body>
     {site.gtmId && (

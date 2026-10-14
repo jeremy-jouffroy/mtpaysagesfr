@@ -2,12 +2,22 @@
 import Base from './Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { img, imgAlt } from '../scripts/utils';
+import { img, imgAlt, url } from '../scripts/utils';
+import { site } from '../config/site';
 
 const { frontmatter } = Astro.props;
+const jsonLd = {
+  '@type': 'Article',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  datePublished: new Date(frontmatter.date).toISOString().slice(0, 10),
+  image: new URL(img(frontmatter.image, 1200, 630), Astro.site).href,
+  author: { '@type': 'Organization', name: site.name, url: new URL(url('/'), Astro.site).href },
+  publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: new URL(url('images/logo-mt-paysages-paysagiste-entretien-creation.webp'), Astro.site).href } },
+};
 const date = new Date(frontmatter.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
-<Base title={frontmatter.title} description={frontmatter.description} image={img(frontmatter.image, 1200, 630)}>
+<Base title={frontmatter.title} description={frontmatter.description} image={img(frontmatter.image, 1200, 630)} jsonLd={jsonLd} ogType="article">
   <PageHero title={frontmatter.title} lead={frontmatter.description} crumbs={[{ label: 'Conseils', href: 'conseils/' }]}>
     <p class="small muted" style="margin:0">Publié le {date}</p>
   </PageHero>

@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
-import { url } from '../scripts/utils';
+import { url, isFilled } from '../scripts/utils';
 
 const faq = [
   { q: 'Je ne paie pas d’impôt sur le revenu, suis-je concerné ?', a: 'Oui. C’est un crédit d’impôt et non une réduction : si vous n’êtes pas imposable, l’administration vous rembourse le montant.' },
@@ -65,7 +65,7 @@ const faq = [
         <li>Être un particulier, propriétaire ou locataire du jardin.</li>
         <li>Le jardin est attenant à votre résidence en France.</li>
         <li>Plafond : 5 000 € de dépenses par an et par foyer pour le jardinage.</li>
-        <li>Faire appel à une entreprise déclarée services à la personne{site.sap.enabled && <> (notre déclaration : n° {site.sap.number})</>}.</li>
+        <li>Faire appel à une entreprise déclarée services à la personne{site.sap.enabled && isFilled(site.sap.number) && <> (notre déclaration : n° {site.sap.number})</>}.</li>
       </ul>
       <p class="small muted">
         Sources : article 199 sexdecies du Code général des impôts, <a href="https://www.servicesalapersonne.gouv.fr" target="_blank" rel="noopener">servicesalapersonne.gouv.fr</a>, <a href="https://www.urssaf.fr" target="_blank" rel="noopener">urssaf.fr</a>.

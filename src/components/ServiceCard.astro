@@ -1,14 +1,15 @@
 ---
-import type { Service } from '../data/services';
+import { serviceCover, type Service } from '../data/services';
 import { site } from '../config/site';
 import { url, img, imgAlt } from '../scripts/utils';
 
 interface Props { service: Service }
 const { service: s } = Astro.props;
+const cover = serviceCover(s);
 const base = s.category === 'entretien' ? 'entretien-jardin' : 'creation-amenagement';
 ---
 <a class="card" href={url(`${base}/${s.slug}/`)}>
-  <img src={img(s.images[0], 600, 400)} alt={imgAlt(s.images[0])} width="600" height="400" loading="lazy" />
+  <img src={img(cover, 600, 400)} alt={imgAlt(cover)} width="600" height="400" loading="lazy" />
   <div class="card-body">
     <h3>{s.title}</h3>
     <p class="muted small">{s.intro.split('. ')[0]}.</p>

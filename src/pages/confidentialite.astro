@@ -2,7 +2,7 @@
 import Legal from '../layouts/Legal.astro';
 import { site } from '../config/site';
 ---
-<Legal title="Politique de confidentialité" description="Comment nous utilisons vos données personnelles.">
+<Legal title="Politique de confidentialité" description={`Politique de confidentialité de ${site.name} : données collectées via le formulaire de devis, finalités, durée de conservation et exercice de vos droits.`}>
   <p class="placeholder-note">TODO : faire relire cette page, et la compléter (outils, cookies, durées) quand des tags de mesure seront activés dans Google Tag Manager, en même temps que la bannière de consentement.</p>
 
   <h2>Responsable du traitement</h2>

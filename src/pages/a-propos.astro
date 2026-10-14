@@ -5,7 +5,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
 import { img, imgAlt } from '../scripts/utils';
 ---
-<Base title="Qui sommes-nous" description={`${site.name}, entreprise de jardinage et paysage à ${site.address.city} : notre histoire, notre équipe et nos engagements.`}>
+<Base title={`Qui sommes-nous ? Paysagiste à ${site.address.city}`} description={`${site.name}, entreprise de jardinage et paysage à ${site.address.city} : notre histoire, notre équipe et nos engagements.`}>
   <PageHero title="Qui sommes-nous ?" lead={`${site.name} est une entreprise locale de jardinage et d’aménagement paysager installée à ${site.address.city}.`} />
 
   <section class="section">
@@ -13,10 +13,21 @@ import { img, imgAlt } from '../scripts/utils';
       <img src={img('paysagiste-mt-paysages-taille-arbustes-secateur.webp')} alt={`${site.legal.director}, fondateur de ${site.name}, en pleine taille d’arbustes`} width="1200" height="1310" style="border-radius:var(--radius)" />
       <div class="prose">
         <span class="eyebrow">Notre histoire</span>
-        <h2>[Titre de l’histoire]</h2>
-        <p class="placeholder-note">TODO : raconter l’histoire en 3 ou 4 paragraphes, à la première personne : parcours, formation (CAP/BP Aménagements paysagers…), création de l’entreprise, ce qui vous plaît dans le métier.</p>
-        <p>[Paragraphe 1]</p>
-        <p>[Paragraphe 2]</p>
+        <h2>Du monde viticole au métier de paysagiste</h2>
+        {/* Source : article de presse locale (public/images/article-presse-mt-paysages-paysagiste-saulon-la-rue.webp). */}
+        <p>
+          {site.legal.director} a passé une quinzaine d’années comme salarié dans le secteur viticole.
+          Le travail du végétal, il connaît. Mais l’envie de s’intéresser à d’autres plantes et de travailler à son compte
+          l’a poussé à se former au métier de paysagiste.
+        </p>
+        <p>
+          Il a créé {site.name} à {site.address.city}, en Côte-d’Or. L’entreprise entretient parcs et jardins, en intervention ponctuelle ou en contrat annuel :
+          tonte, taille de haies et de fruitiers, taille en nuage, création de massifs.
+        </p>
+        <p>
+          Titulaire du certificat de télépilote de drone, {site.legal.director} peut aussi réaliser des prises de vues
+          aériennes de votre jardin, pratiques pour visualiser un projet d’aménagement.
+        </p>
       </div>
     </div>
   </section>
@@ -48,7 +59,11 @@ import { img, imgAlt } from '../scripts/utils';
         ))}
       </div>
       <h3 style="margin-top:2.5rem">Qualifications et labels</h3>
-      <p class="placeholder-note">TODO : afficher uniquement les qualifications réellement obtenues (logos et numéros) : déclaration SAP, adhésion Unep, label Qualipaysage, Certiphyto, diplômes.</p>
+      {/* TODO : ajouter les qualifications réellement obtenues (logos et numéros) : déclaration SAP, adhésion Unep, Qualipaysage, Certiphyto, diplômes. */}
+      <ul class="checklist">
+        <li>Certificat d’aptitude théorique de télépilote de drone</li>
+        <li>Responsabilité civile professionnelle</li>
+      </ul>
     </div>
   </section>
 

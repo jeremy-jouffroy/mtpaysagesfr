@@ -25,6 +25,7 @@ const faq = [
 
   <section class="section">
     <div class="container">
+      <div class="section-head"><h2>Nos prestations d’entretien à {site.address.city}</h2></div>
       <div class="grid grid-3">
         {byCategory('entretien').map((s) => <ServiceCard service={s} />)}
       </div>

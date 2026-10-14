@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 600" width="700" height="600" font-family="Lato, Arial, sans-serif" role="img" aria-labelledby="t">
+<title id="t">Zone d’intervention de MT Paysages : 20 km autour de Saulon-la-Rue (Dijon, Chenôve, Longvic, Gevrey-Chambertin, Nuits-Saint-Georges, Genlis…)</title>
+<rect width="700" height="600" fill="#eef3e8"/>
+<circle cx="350.0" cy="300.0" r="260" fill="#7fa36b" fill-opacity="0.35" stroke="#2d4a2b" stroke-width="2" stroke-dasharray="8 6"/>
+<circle cx="350.0" cy="300.0" r="130" fill="#7fa36b" fill-opacity="0.25" stroke="#2d4a2b" stroke-width="2" stroke-dasharray="4 4"/>
+<text x="350.0" y="62.0" text-anchor="middle" font-size="15" fill="#2d4a2b" font-weight="700">20 km</text>
+<text x="350.0" y="190.0" text-anchor="middle" font-size="13" fill="#2d4a2b">10 km</text>
+<circle cx="331" cy="148" r="5" fill="#2d4a2b"/><text x="321" y="153" text-anchor="end" font-size="15" fill="#1f3a1d">Dijon</text>
+<circle cx="300" cy="207" r="5" fill="#2d4a2b"/><text x="290" y="212" text-anchor="end" font-size="15" fill="#1f3a1d">Chenôve</text>
+<circle cx="357" cy="215" r="5" fill="#2d4a2b"/><text x="367" y="220" text-anchor="start" font-size="15" fill="#1f3a1d">Longvic</text>
+<circle cx="286" cy="311" r="5" fill="#2d4a2b"/><text x="276" y="316" text-anchor="end" font-size="15" fill="#1f3a1d">Gevrey-Chambertin</text>
+<circle cx="242" cy="407" r="5" fill="#2d4a2b"/><text x="252" y="412" text-anchor="start" font-size="15" fill="#1f3a1d">Nuits-Saint-Georges</text>
+<circle cx="515" cy="280" r="5" fill="#2d4a2b"/><text x="525" y="285" text-anchor="start" font-size="15" fill="#1f3a1d">Genlis</text>
+<circle cx="410" cy="164" r="5" fill="#2d4a2b"/><text x="420" y="169" text-anchor="start" font-size="15" fill="#1f3a1d">Quetigny</text>
+<circle cx="287" cy="223" r="5" fill="#2d4a2b"/><text x="277" y="228" text-anchor="end" font-size="15" fill="#1f3a1d">Marsannay-la-Côte</text>
+<circle cx="429" cy="196" r="5" fill="#2d4a2b"/><text x="439" y="201" text-anchor="start" font-size="15" fill="#1f3a1d">Chevigny-Saint-Sauveur</text>
+<circle cx="506" cy="427" r="5" fill="#2d4a2b"/><text x="496" y="432" text-anchor="end" font-size="15" fill="#1f3a1d">Brazey-en-Plaine</text>
+<circle cx="435" cy="282" r="5" fill="#2d4a2b"/><text x="435" y="305" text-anchor="middle" font-size="15" fill="#1f3a1d">Rouvres-en-Plaine</text>
+<circle cx="392" cy="142" r="5" fill="#2d4a2b"/><text x="402" y="147" text-anchor="start" font-size="15" fill="#1f3a1d">Saint-Apollinaire</text>
+<circle cx="350.0" cy="300.0" r="9" fill="#c0612b" stroke="#fff" stroke-width="3"/>
+<text x="350.0" y="330.0" text-anchor="middle" font-size="18" font-weight="700" fill="#1f3a1d">Saulon-la-Rue</text>
+<text x="688" y="588" text-anchor="end" font-size="11" fill="#5b6b57">Positions : geo.api.gouv.fr</text></svg>

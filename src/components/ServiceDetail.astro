@@ -6,7 +6,7 @@ import CtaBand from './CtaBand.astro';
 import TaxCreditBox from './TaxCreditBox.astro';
 import ServiceCard from './ServiceCard.astro';
 import { site } from '../config/site';
-import { services, type Service } from '../data/services';
+import { services, servicePhotos, serviceCover, type Service } from '../data/services';
 import { url, img, imgAlt, telHref } from '../scripts/utils';
 
 interface Props { service: Service }
@@ -19,9 +19,22 @@ const parent =
 const prestation =
   s.slug === 'taille-haies-arbustes' ? 'Taille de haies' : s.category === 'entretien' ? 'Entretien régulier' : 'Création / aménagement';
 const related = services.filter((o) => o.category === s.category && o.slug !== s.slug).slice(0, 3);
+const gallery = servicePhotos(s);
 const showTax = s.sapEligible && site.sap.enabled;
+const longTitle = `${s.h1} à ${site.address.city}`;
+const pageTitle = `${longTitle} | ${site.name}`.length <= 65 ? longTitle : `${s.title} à ${site.address.city}`;
+const serviceSchema = {
+  '@type': 'Service',
+  name: s.title,
+  serviceType: s.title,
+  description: s.metaDescription,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  image: new URL(img(serviceCover(s)), Astro.site).href,
+  provider: { '@id': new URL(url('/'), Astro.site).href + '#entreprise' },
+  areaServed: { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', ...site.address.geo }, geoRadius: site.radiusKm * 1000 },
+};
 ---
-<Base title={`${s.h1} à ${site.address.city}`} description={s.metaDescription} faq={s.faq} image={img(s.images[0], 1200, 630)}>
+<Base title={pageTitle} description={s.metaDescription} faq={s.faq} image={img(serviceCover(s), 1200, 630)} jsonLd={serviceSchema}>
   <PageHero title={s.h1} lead={s.intro} crumbs={[parent]}>
     {showTax && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
   </PageHero>
@@ -47,13 +60,15 @@ const showTax = s.sapEligible && site.sap.enabled;
           {' '}Le prix dépend de la surface, de l’accès et du volume de déchets verts.
         </p>
 
-        <div class="gallery" style="margin-top:2rem">
-          {s.images.map((i) => (
-            <figure>
-              <img src={img(i, 600, 600)} alt={imgAlt(i)} loading="lazy" width="600" height="450" />
-            </figure>
-          ))}
-        </div>
+        {gallery.length > 0 && (
+          <div class="gallery" style="margin-top:2rem">
+            {gallery.map((i) => (
+              <figure>
+                <img src={img(i, 600, 600)} alt={imgAlt(i)} loading="lazy" width="600" height="450" />
+              </figure>
+            ))}
+          </div>
+        )}
 
         {s.faq.length > 0 && (
           <>

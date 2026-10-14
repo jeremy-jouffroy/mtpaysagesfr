@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
 import { img, imgAlt } from '../scripts/utils';
 
 // Ajouter un projet : déposer la photo dans public/images/, la déclarer dans src/data/photos.ts, puis l'ajouter ici.
@@ -30,7 +31,7 @@ const filters = [
   { key: 'elagage', label: 'Élagage' },
 ].filter((f) => f.key === 'all' || projects.some((p) => p.cat === f.key));
 ---
-<Base title="Nos réalisations" description="Découvrez nos chantiers d'entretien et de création de jardins en photos avant / après.">
+<Base title={`Réalisations : jardins avant / après à ${site.address.city}`} description={`Nos chantiers en photos avant / après autour de ${site.address.city} et Dijon : taille d’arbustes, débroussaillage, massifs, terrasses, création de pelouse.`}>
   <PageHero title="Nos réalisations" lead="Quelques jardins que nous avons entretenus, transformés ou créés. La plupart sont photographiés avant et après notre passage." />
   <section class="section">
     <div class="container">

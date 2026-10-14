@@ -6,7 +6,7 @@ import TaxCreditBox from '../components/TaxCreditBox.astro';
 import { site } from '../config/site';
 import { telHref } from '../scripts/utils';
 ---
-<Base title="Demander un devis gratuit" description={`Demandez votre devis gratuit d'entretien ou d'aménagement de jardin à ${site.address.city}. Réponse sous 48 h.`}>
+<Base title={`Devis gratuit jardinier paysagiste à ${site.address.city}`} description={`Demandez votre devis gratuit d'entretien ou d'aménagement de jardin à ${site.address.city} et autour de Dijon. Réponse sous 48 h, montant après crédit d’impôt indiqué.`}>
   <PageHero title="Demander un devis gratuit" lead="Décrivez votre besoin en 2 minutes. Nous vous recontactons sous 48 h ouvrées pour convenir d’une visite gratuite." />
   <section class="section">
     <div class="container layout-aside">
@@ -15,7 +15,7 @@ import { telHref } from '../scripts/utils';
       </div>
       <aside class="aside-sticky">
         <div class="card"><div class="card-body">
-          <h3>Vous préférez appeler ?</h3>
+          <h2>Vous préférez appeler ?</h2>
           <p><a class="btn btn--outline" href={telHref(site.phone)}>📞 {site.phone}</a></p>
           <p class="small muted">{site.hours}</p>
         </div></div>

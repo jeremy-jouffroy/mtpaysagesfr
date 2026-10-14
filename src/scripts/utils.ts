@@ -17,7 +17,7 @@ export function ph(text: string, w = 800, h = 600): string {
   return `https://placehold.co/${w}x${h}/dfe8d6/2d4a2b?font=lato&text=${encodeURIComponent(text)}`;
 }
 
-const isFile = (s: string) => /\.(webp|jpe?g|png|avif)$/i.test(s);
+export const isFile = (s: string) => /\.(webp|jpe?g|png|avif)$/i.test(s);
 
 /**
  * Image du site : un nom de fichier de src/data/photos.ts (photo réelle dans public/images/)
@@ -31,6 +31,11 @@ export function img(s: string, w = 800, h = 600): string {
 
 export function imgAlt(s: string): string {
   return isFile(s) ? photos[s].alt : s.replace(/\n/g, ' ');
+}
+
+/** Faux si la valeur est vide ou encore un [placeholder] de src/config/site.ts : on ne la publie pas. */
+export function isFilled(v?: string | null): v is string {
+  return !!v && !v.trim().startsWith('[');
 }
 
 export function telHref(phone: string): string {

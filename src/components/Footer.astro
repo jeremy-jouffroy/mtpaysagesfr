@@ -1,7 +1,7 @@
 ---
 import { site } from '../config/site';
 import { byCategory } from '../data/services';
-import { url, telHref } from '../scripts/utils';
+import { url, telHref, isFilled } from '../scripts/utils';
 ---
 <footer class="site-footer">
   <div class="container">
@@ -53,7 +53,7 @@ import { url, telHref } from '../scripts/utils';
     <div class="footer-bottom">
       <p>
         © {new Date().getFullYear()} {site.legal.companyName} · SIRET {site.legal.siret}
-        {site.sap.enabled && <> · Déclaration SAP n° {site.sap.number}</>}
+        {site.sap.enabled && isFilled(site.sap.number) && <> · Déclaration SAP n° {site.sap.number}</>}
       </p>
       <ul>
         <li><a href={url('mentions-legales/')}>Mentions légales</a></li>

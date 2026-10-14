@@ -1,9 +1,9 @@
 ---
 layout: ../../layouts/Article.astro
 title: Le calendrier d’entretien du jardin, mois par mois
-description: Tonte, taille, plantations, désherbage… ce qu’il faut faire au jardin à chaque saison.
+description: Tonte, taille, plantations, désherbage… Le calendrier du jardinier saison par saison pour entretenir votre jardin en Côte-d’Or.
 date: 2026-09-01
-image: "Calendrier illustré\ndes 4 saisons au jardin"
+image: plantation-arbres-tuteurage-jardin-paysagiste.webp
 ---
 
 Un jardin demande peu de travail s’il est fait au bon moment. Voici les grandes étapes de l’année.
