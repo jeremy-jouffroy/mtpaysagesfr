@@ -24,7 +24,7 @@ export const site = {
   gardensMaintained: '187',
 
   // Liens externes
-  googleReviewsUrl: 'https://maps.app.goo.gl/xjpntUprkQQQGZGv5',
+  googleReviewsUrl: 'https://maps.app.goo.gl/pe4eDJ8kFM9YLLbr9',
   // Note et nombre d'avis Google, à mettre à jour quand de nouveaux avis arrivent (avis affichés : src/data/reviews.ts)
   googleRating: { value: 5, count: 4 } as null | { value: number; count: number },
   social: {
