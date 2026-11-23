@@ -15,15 +15,15 @@ export function getStaticPaths() {
 }
 const { city } = Astro.props as { city: City };
 
-const km = site.communes.find((c) => c.name === city.name)?.km;
-if (km === undefined) throw new Error(`Commune absente de site.communes : ${city.name}`);
+const km = site.communes.find((c) => c.name === city.name)?.km ?? city.km;
+if (km === undefined) throw new Error(`Distance inconnue pour ${city.name} : l'ajouter à site.communes ou renseigner km`);
 
 const cityServices = city.services.map((slug) => {
   const s = services.find((x) => x.slug === slug);
   if (!s) throw new Error(`Service inconnu pour ${city.name} : ${slug}`);
   return s;
 });
-const others = cities.filter((c) => c.name !== city.name);
+const others = cities.filter((c) => c.sector === city.sector && c.name !== city.name);
 
 const title = `Jardinier paysagiste à ${city.name}`;
 const jsonLd = {
@@ -104,7 +104,7 @@ const jsonLd = {
       <h2>Questions fréquentes à {city.name}</h2>
       <Faq items={city.faq} />
       <p class="muted" style="margin-top:1.5rem">
-        Nous intervenons aussi à {others.map((c, i) => (
+        Nous intervenons aussi près de chez vous, à {others.map((c, i) => (
           <>{i > 0 && ', '}<a href={url(`jardinier-${slugify(c.name)}/`)}>{c.name}</a></>
         ))}, ainsi que dans <a href={url('zone-intervention/')}>toutes les communes à {site.radiusKm} km de {site.address.city}</a>.
       </p>

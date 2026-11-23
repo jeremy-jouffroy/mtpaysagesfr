@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
 import { url, slugify } from '../scripts/utils';
-import { cities } from '../data/cities';
+import { cities, sectorLabels, type Sector } from '../data/cities';
 
 const bands = [5, 10, 15, 20].map((max, i, all) => ({
   label: i === 0 ? `Moins de ${max} km` : `De ${all[i - 1]} à ${max} km`,
@@ -28,9 +28,17 @@ const bands = [5, 10, 15, 20].map((max, i, all) => ({
         {cities.length > 0 && (
           <>
             <h3 style="margin-top:2rem">Pages par commune</h3>
-            <ul>
-              {cities.map((c) => <li><a href={url(`jardinier-${slugify(c.name)}/`)}>Jardinier paysagiste à {c.name}</a></li>)}
-            </ul>
+            {(Object.keys(sectorLabels) as Sector[]).map((sec) => {
+              const list = cities.filter((c) => c.sector === sec);
+              return list.length > 0 && (
+                <>
+                  <h4 style="margin-top:1rem">{sectorLabels[sec]}</h4>
+                  <ul>
+                    {list.map((c) => <li><a href={url(`jardinier-${slugify(c.name)}/`)}>Jardinier paysagiste à {c.name}</a></li>)}
+                  </ul>
+                </>
+              );
+            })}
           </>
         )}
         <p class="muted">Votre commune n’est pas dans la liste ? <a href={url('contact/')}>Contactez-nous</a> : nous étudions chaque demande.</p>
