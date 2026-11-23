@@ -1,5 +1,7 @@
 // dataLayer du site (plan de marquage : voir README, section « Tracking »).
-// Aucune donnée personnelle n'est poussée : ni nom, ni email, ni téléphone du visiteur, ni message.
+// Seul generate_lead contient des données personnelles (nom, email, téléphone, code postal) :
+// à n'utiliser que dans des tags autorisés à les recevoir (ex. conversions améliorées Google Ads),
+// avec le consentement du visiteur. Ne jamais les envoyer à GA4 (interdit par ses conditions).
 
 type DataLayerEvent = Record<string, unknown> & { event: string };
 
@@ -26,6 +28,24 @@ export function trackThen(data: DataLayerEvent, next: () => void, timeout = 1000
   };
   track({ ...data, eventCallback: go, eventTimeout: timeout });
   setTimeout(go, timeout + 100);
+}
+
+/**
+ * Numéro français au format international E.164 (+33XXXXXXXXX), ou '' si le numéro n'est pas reconnu.
+ * Accepte 06 12 34 56 78, 06.12.34.56.78, +33 6 12 34 56 78, 0033612345678, +33 (0)6 12 34 56 78.
+ */
+export function toE164FR(raw: string): string {
+  let d = raw.replace(/\(0\)/g, '').replace(/[^\d+]/g, '');
+  if (d.startsWith('00')) d = '+' + d.slice(2);
+  if (d.startsWith('+33')) d = d.slice(3);
+  else if (d.startsWith('+')) return ''; // numéro étranger : non géré
+  if (d.startsWith('0')) d = d.slice(1);
+  return /^[1-9]\d{8}$/.test(d) ? `+33${d}` : '';
+}
+
+/** Code postal à 5 chiffres trouvé dans le texte saisi (« 21910 », « Saulon 21910 »…), ou ''. */
+export function extractPostalCode(raw: string): string {
+  return raw.match(/\b\d{5}\b/)?.[0] ?? '';
 }
 
 /** Écoute les clics sur les CTA principaux : devis, téléphone, email. */

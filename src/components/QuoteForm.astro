@@ -102,7 +102,7 @@ const prestations = [
 </form>
 
 <script>
-  import { track, trackThen } from '../scripts/tracking';
+  import { track, trackThen, toE164FR, extractPostalCode } from '../scripts/tracking';
 
   const form = document.getElementById('quote-form') as HTMLFormElement | null;
 
@@ -140,14 +140,20 @@ const prestations = [
         });
         const json = await res.json();
         if (!json.success) throw new Error(json.message);
+        const field = (name: string) => String(new FormData(form).get(name) ?? '').trim();
+        const checked = [...form.querySelectorAll<HTMLInputElement>('input[name="Prestations"]:checked')].map((cb) => cb.value);
+        const prestation = checked.length ? checked.join(', ') : 'non précisé';
         trackThen(
           {
             event: 'generate_lead',
             form_name: 'devis',
             form_location: location.pathname,
-            services: form.querySelectorAll('input[name="Prestations"]:checked').length
-              ? [...form.querySelectorAll<HTMLInputElement>('input[name="Prestations"]:checked')].map((cb) => cb.value).join(', ')
-              : 'non précisé',
+            prestation,
+            services: prestation, // ancien nom, conservé tant que GTM l'utilise
+            name: field('name'),
+            postal_code: extractPostalCode(field('Commune')),
+            email: field('email').toLowerCase(),
+            phone_number: toE164FR(field('Téléphone')),
           },
           () => (location.href = thanks),
         );

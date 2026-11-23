@@ -34,19 +34,29 @@ email, sans serveur. Pour l'activer, créer une clé d'accès avec l'email de r�
 
 ## Tracking (dataLayer)
 
-Le site alimente `window.dataLayer` sans charger d'outil de mesure. Aucune donnée personnelle n'y est poussée.
+Le site alimente `window.dataLayer` sans charger d'outil de mesure. Seul `generate_lead` contient des données personnelles (voir plus bas).
 Code : `src/scripts/tracking.ts`, initialisation dans `src/layouts/Base.astro`.
 
 | Événement | Déclencheur | Paramètres |
 | --- | --- | --- |
 | `page_view` | Chaque page, dans le `<head>` | `page_type`, `page_path`, `page_title` |
 | `cta_click` | Clic sur un lien devis, téléphone ou email | `cta_type` (`quote` / `phone` / `email`), `cta_location` (`header`, `hero`, `service_sidebar`, `cta_band`, `mobile_bar`, `footer`, `content`), `cta_text`, `link_url` |
-| `generate_lead` | Demande de devis acceptée par Web3Forms, avant la redirection vers `/merci/` | `form_name`, `form_location`, `services` |
+| `generate_lead` | Demande de devis acceptée par Web3Forms, avant la redirection vers `/merci/` | `form_name`, `form_location`, `prestation` (et `services`, ancien nom), `name`, `postal_code`, `email`, `phone_number` |
 | `form_error` | Échec de l'envoi du formulaire | `form_name`, `form_location` |
 
 `page_type` : `home`, `service_category`, `service`, `city`, `blog`, `article`, `quote_form`, `thank_you`, `legal`,
 `error_404`, ou le nom de la page (`contact`, `a-propos`, `realisations`, `avis`, `zone-intervention`, `credit-impot-50`).
 Pour forcer un `cta_location`, ajouter `data-cta-location="…"` sur un bloc parent.
+
+Paramètres de `generate_lead` :
+- `prestation` : prestations cochées, séparées par des virgules, ou `non précisé`.
+- `name`, `email` (en minuscules) : tels que saisis.
+- `postal_code` : code postal à 5 chiffres trouvé dans le champ « Code postal ou commune », vide si seule la commune est saisie.
+- `phone_number` : format international `+33XXXXXXXXX`, vide si non renseigné ou non reconnu (numéro étranger).
+
+Ce sont des données personnelles : ne les transmettre qu'aux tags qui en ont besoin (ex. conversions améliorées
+Google Ads), avec le consentement du visiteur, et jamais à GA4 (interdit par ses conditions d'utilisation).
+Les mentionner dans `src/pages/confidentialite.astro`.
 
 Google Tag Manager (`gtmId` dans `src/config/site.ts`) est chargé juste après l'initialisation du dataLayer, avec le
 Consent Mode v2 refusé par défaut. `generate_lead` utilise
