@@ -7,6 +7,8 @@
 // Ne jamais inventer un chantier ou un avis.
 
 import type { Faq } from './services';
+import { site } from '../config/site';
+import { slugify } from '../scripts/utils';
 
 export interface CityProject {
   title: string; // ex. « Taille d'une haie de charmilles, rue des Vignes »
@@ -870,3 +872,35 @@ export const cities: City[] = [
     ],
   },
 ];
+
+// ─── Maillage interne ─────────────────────────────────────────
+
+/** Communes mises en avant dans le pied de page (lien sur toutes les pages : en garder 6 à 8). */
+export const featuredCities = [
+  'Dijon', 'Chevigny-Saint-Sauveur', 'Gevrey-Chambertin', 'Saint-Apollinaire',
+  'Talant', 'Fontaine-lès-Dijon', 'Fixin', 'Rouvres-en-Plaine',
+];
+
+export const cityPath = (name: string) => `jardinier-${slugify(name)}/`;
+
+export function cityByName(name: string): City | undefined {
+  return cities.find((c) => c.name === name);
+}
+
+/** Distance depuis la base : site.communes, à défaut le champ km de la commune. */
+export function cityKm(c: City): number {
+  const km = site.communes.find((x) => x.name === c.name)?.km ?? c.km;
+  if (km === undefined) throw new Error(`Distance inconnue pour ${c.name} : l'ajouter à site.communes ou renseigner km`);
+  return km;
+}
+
+/** Au-delà du rayon d'entretien : uniquement des chantiers d'aménagement. */
+export const isWorksOnly = (c: City) => cityKm(c) > site.radiusKm;
+
+/** Communes dont la page met ce service en avant, de la plus proche à la plus éloignée. */
+export function citiesForService(slug: string, limit = 8): City[] {
+  return cities.filter((c) => c.services.includes(slug)).sort((a, b) => cityKm(a) - cityKm(b)).slice(0, limit);
+}
+
+// Vérifications au build : une faute de frappe casserait un lien sans prévenir.
+for (const n of featuredCities) if (!cityByName(n)) throw new Error(`featuredCities : commune sans page : ${n}`);

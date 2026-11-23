@@ -3,8 +3,8 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
-import { url, slugify } from '../scripts/utils';
-import { cities, sectorLabels, type Sector } from '../data/cities';
+import { url } from '../scripts/utils';
+import { cities, sectorLabels, cityByName, cityPath, isWorksOnly, type Sector } from '../data/cities';
 
 const bands = [5, 10, 15, 20].map((max, i, all) => ({
   label: i === 0 ? `Moins de ${max} km` : `De ${all[i - 1]} à ${max} km`,
@@ -21,7 +21,7 @@ const bands = [5, 10, 15, 20].map((max, i, all) => ({
           <>
             <h3 style="margin-top:1.5rem">{b.label} de {site.address.city}</h3>
             <ul class="communes">
-              {b.communes.map((c) => <li>📍 {c.name}</li>)}
+              {b.communes.map((c) => <li>📍 {cityByName(c.name) ? <a href={url(cityPath(c.name))}>{c.name}</a> : c.name}</li>)}
             </ul>
           </>
         ))}
@@ -34,7 +34,7 @@ const bands = [5, 10, 15, 20].map((max, i, all) => ({
                 <>
                   <h4 style="margin-top:1rem">{sectorLabels[sec]}</h4>
                   <ul>
-                    {list.map((c) => <li><a href={url(`jardinier-${slugify(c.name)}/`)}>Jardinier paysagiste à {c.name}</a></li>)}
+                    {list.map((c) => <li><a href={url(cityPath(c.name))}>{isWorksOnly(c) ? `Aménagement paysager à ${c.name}` : `Entretien de jardin à ${c.name}`}</a></li>)}
                   </ul>
                 </>
               );

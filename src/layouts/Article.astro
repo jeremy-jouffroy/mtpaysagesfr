@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { img, imgAlt, url } from '../scripts/utils';
 import { site } from '../config/site';
+import { cityByName, cityPath } from '../data/cities';
 
 const { frontmatter } = Astro.props;
 const jsonLd = {
@@ -15,6 +16,9 @@ const jsonLd = {
   author: { '@type': 'Organization', name: site.name, url: new URL(url('/'), Astro.site).href },
   publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: new URL(url('images/logo-mt-paysages-paysagiste-entretien-creation.webp'), Astro.site).href } },
 };
+// Liens locaux en fin d'article (frontmatter : localLinks.intro + localLinks.cities)
+const local = frontmatter.localLinks as { intro: string; cities: string[] } | undefined;
+for (const n of local?.cities ?? []) if (!cityByName(n)) throw new Error(`localLinks : commune sans page : ${n}`);
 const date = new Date(frontmatter.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Base title={frontmatter.title} description={frontmatter.description} image={img(frontmatter.image, 1200, 630)} jsonLd={jsonLd} ogType="article">
@@ -25,6 +29,13 @@ const date = new Date(frontmatter.date).toLocaleDateString('fr-FR', { day: 'nume
     <article class="container prose">
       <img src={img(frontmatter.image, 900, 500)} alt={imgAlt(frontmatter.image)} width="900" height="500" style="border-radius:var(--radius);margin-bottom:2rem" />
       <slot />
+      {local && (
+        <p>
+          {local.intro} {local.cities.map((n, i) => (
+            <>{i > 0 && (i === local.cities.length - 1 ? ' et ' : ', ')}<a href={url(cityPath(n))}>{n}</a></>
+          ))}.
+        </p>
+      )}
     </article>
   </section>
   <CtaBand />

@@ -13,7 +13,7 @@ const posts = Object.values(import.meta.glob<Post>('./*.md', { eager: true })).s
   <section class="section">
     <div class="container grid grid-3">
       {posts.map((p) => (
-        <a class="card" href={p.url + '/'}>
+        <a class="card" href={p.url.replace(/\/?$/, '/')}>
           <img src={img(p.frontmatter.image, 600, 340)} alt="" width="600" height="340" loading="lazy" />
           <div class="card-body">
             <h2>{p.frontmatter.title}</h2>

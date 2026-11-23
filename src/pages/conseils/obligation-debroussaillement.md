@@ -4,6 +4,13 @@ title: "Obligation légale de débroussaillement : êtes-vous concerné ?"
 description: "Obligation légale de débroussaillement (OLD) : qui doit débroussailler, sur quelle distance autour de la maison, et quelles sanctions en cas d’oubli."
 date: 2026-08-20
 image: debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp
+localLinks:
+  intro: "Nous débroussaillons régulièrement des terrains en lisière de bois autour de Dijon, par exemple à"
+  cities:
+    - Hauteville-lès-Dijon
+    - Asnières-lès-Dijon
+    - Corcelles-les-Monts
+    - Savouges
 ---
 
 Dans les communes exposées aux feux de forêt, les propriétaires doivent débroussailler autour de leur habitation. Cette obligation protège votre maison et limite la propagation des incendies.

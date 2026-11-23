@@ -4,6 +4,13 @@ title: Le calendrier d’entretien du jardin, mois par mois
 description: Tonte, taille, plantations, désherbage… Le calendrier du jardinier saison par saison pour entretenir votre jardin en Côte-d’Or.
 date: 2026-09-01
 image: plantation-arbres-tuteurage-jardin-paysagiste.webp
+localLinks:
+  intro: "C’est ce calendrier que nous suivons pour l’entretien des jardins de notre zone, par exemple à"
+  cities:
+    - Ahuy
+    - Bellefond
+    - Ruffey-lès-Echirey
+    - Norges-la-Ville
 ---
 
 Un jardin demande peu de travail s’il est fait au bon moment. Voici les grandes étapes de l’année.

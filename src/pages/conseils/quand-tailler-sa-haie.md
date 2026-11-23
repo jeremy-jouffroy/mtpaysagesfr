@@ -4,6 +4,13 @@ title: Quand tailler sa haie ? Le calendrier selon les espèces
 description: Les meilleures périodes pour tailler une haie, la période de nidification à respecter et les règles de voisinage à connaître.
 date: 2026-09-15
 image: haie-laurier-taillee-pelouse-entretien-jardin-saulon-la-rue.webp
+localLinks:
+  intro: "Nous taillons les haies de nos clients autour de Saulon-la-Rue, notamment à"
+  cities:
+    - Chevigny-Saint-Sauveur
+    - Saint-Apollinaire
+    - Varois-et-Chaignot
+    - Hauteville-lès-Dijon
 ---
 
 Une haie taillée au bon moment reste dense, fleurit mieux et cicatrise plus vite. Voici les repères à suivre.

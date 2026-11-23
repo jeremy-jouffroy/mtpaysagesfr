@@ -2,6 +2,7 @@
 import { site } from '../config/site';
 import { byCategory } from '../data/services';
 import { url, telHref, isFilled } from '../scripts/utils';
+import { featuredCities, cityPath } from '../data/cities';
 ---
 <footer class="site-footer">
   <div class="container">
@@ -35,6 +36,13 @@ import { url, telHref, isFilled } from '../scripts/utils';
         <ul>
           {byCategory('creation').map((s) => <li><a href={url(`creation-amenagement/${s.slug}/`)}>{s.title}</a></li>)}
           <li><a href={url('elagage-abattage/')}>Élagage et abattage</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Jardinier près de chez vous</h3>
+        <ul>
+          {featuredCities.map((n) => <li><a href={url(cityPath(n))}>{n}</a></li>)}
+          <li><a href={url('zone-intervention/')}>Toutes les communes</a></li>
         </ul>
       </div>
       <div>

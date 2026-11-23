@@ -7,7 +7,7 @@ import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
 import { services } from '../data/services';
-import { cities, type City } from '../data/cities';
+import { cities, cityKm, isWorksOnly, cityPath, type City } from '../data/cities';
 import { url, img, imgAlt, slugify } from '../scripts/utils';
 
 export function getStaticPaths() {
@@ -15,8 +15,7 @@ export function getStaticPaths() {
 }
 const { city } = Astro.props as { city: City };
 
-const km = site.communes.find((c) => c.name === city.name)?.km ?? city.km;
-if (km === undefined) throw new Error(`Distance inconnue pour ${city.name} : l'ajouter à site.communes ou renseigner km`);
+const km = cityKm(city);
 
 const cityServices = city.services.map((slug) => {
   const s = services.find((x) => x.slug === slug);
@@ -24,7 +23,7 @@ const cityServices = city.services.map((slug) => {
   return s;
 });
 // Au-delà du rayon d'entretien : uniquement des chantiers d'aménagement (pas d'entretien, pas de crédit d'impôt).
-const worksOnly = km > site.radiusKm;
+const worksOnly = isWorksOnly(city);
 const others = cities.filter((c) => c.sector === city.sector && c.name !== city.name);
 
 const title = worksOnly ? `Paysagiste à ${city.name} : création et aménagement` : `Jardinier paysagiste à ${city.name}`;
@@ -111,7 +110,7 @@ const jsonLd = {
       <Faq items={city.faq} />
       <p class="muted" style="margin-top:1.5rem">
         Nous intervenons aussi près de chez vous, à {others.map((c, i) => (
-          <>{i > 0 && ', '}<a href={url(`jardinier-${slugify(c.name)}/`)}>{c.name}</a></>
+          <>{i > 0 && ', '}<a href={url(cityPath(c.name))}>{c.name}</a></>
         ))}, ainsi que dans <a href={url('zone-intervention/')}>toutes les communes à {site.radiusKm} km de {site.address.city}</a>.
       </p>
     </div>

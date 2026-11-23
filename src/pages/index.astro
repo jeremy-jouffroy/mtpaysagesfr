@@ -25,6 +25,10 @@ const faq = [
     a: 'Oui, l’évacuation est comprise dans nos interventions. Si vous le souhaitez, nous pouvons aussi broyer les branchages pour pailler vos massifs.',
   },
 ];
+import { cities, cityByName, cityPath, cityKm } from '../data/cities';
+// Pages communes absentes des 20 communes listées : citées en lien sous la liste.
+const listed = new Set(site.communes.slice(0, 20).map((c) => c.name));
+const farCities = cities.filter((c) => !listed.has(c.name)).sort((a, b) => cityKm(a) - cityKm(b));
 ---
 <Base title={`${site.name} – Jardinier paysagiste à ${site.address.city}`} faq={faq} image={img('allee-pas-japonais-dalles-pelouse-jardin.webp')}>
   <!-- HERO -->
@@ -156,9 +160,13 @@ const faq = [
         <span class="eyebrow">Zone d’intervention</span>
         <h2>À {site.address.city} et dans un rayon de {site.radiusKm} km</h2>
         <ul class="communes">
-          {site.communes.slice(0, 20).map((c) => <li>📍 {c.name}</li>)}
+          {site.communes.slice(0, 20).map((c) => <li>📍 {cityByName(c.name) ? <a href={url(cityPath(c.name))}>{c.name}</a> : c.name}</li>)}
         </ul>
-        <p class="muted small">… et {site.communes.length - 20} autres communes, dont Dijon, Chenôve, Longvic et Nuits-Saint-Georges.</p>
+        <p class="muted small">
+          … et {site.communes.length - 20} autres communes, dont {farCities.map((c, i) => (
+            <>{i > 0 && ', '}<a href={url(cityPath(c.name))}>{c.name}</a></>
+          ))}.
+        </p>
         <a href={url('zone-intervention/')}>Voir toute la zone d’intervention →</a>
       </div>
       <img src={url('images/carte-zone-intervention-saulon-la-rue.svg')} alt={`Carte de la zone d’intervention : ${site.radiusKm} km autour de ${site.address.city}, de Dijon à Nuits-Saint-Georges et Genlis`} loading="lazy" width="700" height="600" style="border-radius:var(--radius)" />
