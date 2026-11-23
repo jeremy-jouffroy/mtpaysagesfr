@@ -763,35 +763,35 @@ export const cities: City[] = [
     km: 23,
     sector: 'nord',
     description:
-      "Jardinier paysagiste à Messigny-et-Vantoux : débroussaillage, taille de haies, ramassage des feuilles, jardins en lisière de bois. Devis gratuit.",
+      "Paysagiste à Messigny-et-Vantoux : création de jardin, terrassement, terrasses, pavage, plantations et engazonnement. Devis gratuit et détaillé.",
     intro:
-      "Au nord de Dijon, entre plateau et vallée boisée, Messigny-et-Vantoux est à environ 23 km de Saulon-la-Rue, juste au-delà de notre rayon habituel. Nous y intervenons sur devis.",
+      "Au nord de Dijon, Messigny-et-Vantoux est à environ 23 km de Saulon-la-Rue, au-delà de notre rayon d'entretien. Nous y réalisons des chantiers d'aménagement extérieur : création de jardin, terrasses, pavage, plantations.",
     context: {
-      title: 'Des jardins au bord des bois',
+      title: 'Aménager un terrain entre plateau et vallée',
       paragraphs: [
-        "Entouré de forêts et de combes, Messigny-et-Vantoux compte de nombreux jardins en lisière de bois. Feuilles, branches tombées, ronces et rejets d'arbres y demandent une attention particulière.",
-        "Nous proposons des interventions de remise en état (débroussaillage, nettoyage, taille) et un entretien saisonnier planifié, notamment au printemps et à l'automne, quand le travail est le plus important.",
+        "Entre plateau calcaire et vallée boisée, les terrains de Messigny-et-Vantoux sont parfois en pente et souvent caillouteux. Un aménagement réussi commence par le terrassement : décaissement, nivellement, évacuation des déblais, et si besoin murets pour tenir la terre.",
+        "Nous prenons en charge le chantier de bout en bout : terrasse ou pavage posés sur un fond de forme solide, allées, plantation d'arbres, de haies et de massifs adaptés au sol, puis engazonnement. Ce sont des travaux sur plusieurs jours, pour lesquels la distance pèse peu.",
       ],
     },
-    services: ['debroussaillage', 'taille-haies-arbustes', 'ramassage-feuilles'],
+    services: ['terrasses-allees', 'plantations-massifs', 'engazonnement'],
     gallery: [
-      'debroussaillage-nettoyage-cour-corps-de-ferme-avant-apres.webp',
-      'arrachage-haie-thuyas-nettoyage-jardin-avant-apres.webp',
-      'paysagiste-mt-paysages-taille-arbustes-secateur.webp',
+      'decaissement-mini-pelle-preparation-pavage-terrasse.webp',
+      'creation-terrasse-carrelage-exterieur-avant-apres.webp',
+      'plantation-arbres-tuteurage-jardin-paysagiste.webp',
     ],
     projects: [], // TODO : 2–3 chantiers réels à Messigny-et-Vantoux
     faq: [
       {
         q: 'Intervenez-vous à Messigny-et-Vantoux ?',
-        a: "Oui. Messigny-et-Vantoux est à environ 23 km de Saulon-la-Rue, un peu au-delà de notre rayon habituel de 20 km. Nous y intervenons sur devis, de préférence en regroupant les passages avec les communes voisines.",
+        a: "Oui, pour les chantiers d'aménagement. La commune est à environ 23 km de Saulon-la-Rue, au-delà du rayon de 20 km où nous assurons l'entretien régulier.",
       },
       {
-        q: 'Pouvez-vous nettoyer un jardin envahi par les feuilles et les branches ?',
-        a: "Oui. Nous ramassons feuilles et branches, débroussaillons les zones envahies et évacuons ou broyons les déchets verts sur place.",
+        q: 'Quels travaux réalisez-vous à cette distance ?',
+        a: "Les chantiers d'aménagement extérieur : création de jardin, terrassement, terrasses, pavage et allées, plantations d'arbres, de haies et de massifs, engazonnement. Nous ne proposons pas d'entretien régulier (tonte, taille) aussi loin de notre base.",
       },
       {
-        q: "Le crédit d'impôt de 50 % s'applique-t-il ?",
-        a: "Oui pour l'entretien courant du jardin (tonte, taille, débroussaillage léger, ramassage des feuilles), au titre des services à la personne.",
+        q: "Ces travaux ouvrent-ils droit au crédit d'impôt de 50 % ?",
+        a: "Non. Le crédit d'impôt des services à la personne ne concerne que l'entretien courant du jardin. Les travaux de création et d'aménagement n'y ouvrent pas droit, mais le devis est gratuit et détaillé poste par poste.",
       },
     ],
   },
@@ -800,35 +800,35 @@ export const cities: City[] = [
     km: 22,
     sector: 'nord',
     description:
-      "Jardinier paysagiste à Clénay : tonte de grandes pelouses, engazonnement, taille de haies. 50 % de crédit d'impôt sur l'entretien, devis gratuit.",
+      "Paysagiste à Clénay : engazonnement, terrassement, terrasses et pavage, plantations, création de jardin. Devis gratuit et détaillé.",
     intro:
-      "Au nord-est de Dijon, Clénay est à environ 22 km de Saulon-la-Rue, juste au-delà de notre rayon habituel. Nous y intervenons sur devis, pour l'entretien comme pour les créations de pelouse.",
+      "Au nord-est de Dijon, Clénay est à environ 22 km de Saulon-la-Rue, au-delà de notre rayon d'entretien. Nous y réalisons des chantiers d'aménagement : pelouses, terrasses, pavage, plantations, création de jardin.",
     context: {
-      title: 'Des terrains de plaine, souvent spacieux',
+      title: 'Des terrains plats, faciles à aménager',
       paragraphs: [
-        "Les terrains de Clénay sont généralement plats, avec de belles surfaces de pelouse et des haies de clôture assez longues. Notre matériel est adapté à ces grandes surfaces.",
-        "Pour une pelouse fatiguée ou un terrain à engazonner, nous préparons le sol puis semons un gazon rustique adapté aux étés secs. Nous pouvons ensuite assurer les tontes en saison.",
+        "Les terrains de Clénay sont généralement plats et spacieux, idéaux pour un aménagement complet : grande pelouse, terrasse dans le prolongement de la maison, allée carrossable pavée, haie de clôture.",
+        "Pour une maison neuve, nous partons du terrain nu : nettoyage des gravats, terrassement et nivellement, apport de terre végétale, puis semis d'un gazon rustique adapté aux étés secs et plantation des haies et massifs.",
       ],
     },
-    services: ['tonte-pelouse', 'engazonnement', 'taille-haies-arbustes'],
+    services: ['engazonnement', 'terrasses-allees', 'plantations-massifs'],
     gallery: [
       'avant-apres-creation-pelouse-gazon-jardin-saulon-la-rue.webp',
+      'decaissement-mini-pelle-preparation-pavage-terrasse.webp',
       'semis-gazon-massifs-arbustes-paillage-mineral-avant-apres.webp',
-      'haie-laurier-taillee-pelouse-entretien-jardin-saulon-la-rue.webp',
     ],
     projects: [], // TODO : 2–3 chantiers réels à Clénay
     faq: [
       {
         q: 'Intervenez-vous à Clénay ?',
-        a: "Oui. Clénay est à environ 22 km de Saulon-la-Rue, un peu au-delà de notre rayon habituel de 20 km. Nous y intervenons sur devis, en regroupant les passages avec les communes voisines.",
+        a: "Oui, pour les chantiers d'aménagement. Clénay est à environ 22 km de Saulon-la-Rue, au-delà du rayon de 20 km où nous assurons l'entretien régulier.",
       },
       {
-        q: 'Regarnir ou refaire entièrement une pelouse ?',
-        a: "Si moins d'un tiers de la surface est abîmé, un regarnissage suffit souvent. Au-delà, ou si le sol est très tassé, il vaut mieux refaire la pelouse. Nous vous conseillons sur place.",
+        q: 'Quels travaux réalisez-vous à cette distance ?',
+        a: "Les chantiers d'aménagement extérieur : création de jardin, terrassement, terrasses, pavage et allées, plantations d'arbres, de haies et de massifs, engazonnement. Nous ne proposons pas d'entretien régulier (tonte, taille) aussi loin de notre base.",
       },
       {
-        q: "Le crédit d'impôt de 50 % s'applique-t-il ?",
-        a: "Oui pour l'entretien courant (tonte, taille, désherbage). La création ou la réfection complète d'une pelouse n'y ouvre pas droit.",
+        q: "Ces travaux ouvrent-ils droit au crédit d'impôt de 50 % ?",
+        a: "Non. Le crédit d'impôt des services à la personne ne concerne que l'entretien courant du jardin. Les travaux de création et d'aménagement n'y ouvrent pas droit, mais le devis est gratuit et détaillé poste par poste.",
       },
     ],
   },
@@ -837,35 +837,35 @@ export const cities: City[] = [
     km: 25,
     sector: 'cote',
     description:
-      "Jardinier paysagiste à Ruffey-lès-Beaune : création de jardin, terrasses, massifs et entretien planifié. 50 % de crédit d'impôt sur l'entretien, devis gratuit.",
+      "Paysagiste à Ruffey-lès-Beaune : création de jardin, terrassement, terrasses, pavage, plantations et engazonnement. Devis gratuit et détaillé.",
     intro:
-      "Dans la plaine près de Beaune, Ruffey-lès-Beaune est à environ 25 km de Saulon-la-Rue, au-delà de notre rayon habituel. Nous y intervenons sur devis, surtout pour des aménagements et un entretien planifié.",
+      "Dans la plaine près de Beaune, Ruffey-lès-Beaune est à environ 25 km de Saulon-la-Rue, au-delà de notre rayon d'entretien. Nous y réalisons des chantiers d'aménagement extérieur, du terrassement à la plantation.",
     context: {
-      title: 'Des chantiers d’aménagement et un entretien organisé',
+      title: 'Des chantiers d’aménagement complets',
       paragraphs: [
-        "À cette distance, nous intervenons surtout pour des chantiers bien définis : création ou rénovation de jardin, terrasse, allée, massifs, engazonnement. Ce sont des travaux sur plusieurs jours, pour lesquels la distance pèse peu.",
-        "Pour l'entretien, nous proposons des passages planifiés à l'avance (taille des haies, gros nettoyages de saison) plutôt que des tontes très fréquentes, afin de garder un tarif raisonnable.",
+        "À cette distance, nous intervenons pour des projets bien définis : création ou rénovation complète d'un jardin, terrasse, pavage d'une cour ou d'une allée, plantation d'arbres et de haies, engazonnement. Ce sont des chantiers de plusieurs jours, pour lesquels la distance pèse peu.",
+        "Nous assurons tout le chantier avec notre propre matériel : terrassement à la mini-pelle, préparation du fond de forme, pose, plantation et finitions, avec un chantier nettoyé chaque soir.",
       ],
     },
-    services: ['plantations-massifs', 'terrasses-allees', 'taille-haies-arbustes'],
+    services: ['terrasses-allees', 'plantations-massifs', 'engazonnement'],
     gallery: [
       'creation-terrain-petanque-terrasse-bois-avant-apres.webp',
       'plantation-grand-olivier-jardin-piscine-paysagiste.webp',
-      'creation-massif-arbustes-paillage-mineral-avant-apres.webp',
+      'decaissement-mini-pelle-preparation-pavage-terrasse.webp',
     ],
     projects: [], // TODO : 2–3 chantiers réels à Ruffey-lès-Beaune
     faq: [
       {
         q: 'Intervenez-vous à Ruffey-lès-Beaune ?',
-        a: "Oui, sur devis. Ruffey-lès-Beaune est à environ 25 km de Saulon-la-Rue, au-delà de notre rayon habituel de 20 km. Nous y réalisons surtout des aménagements et un entretien planifié.",
+        a: "Oui, pour les chantiers d'aménagement. La commune est à environ 25 km de Saulon-la-Rue, au-delà du rayon de 20 km où nous assurons l'entretien régulier.",
       },
       {
-        q: 'Quels travaux d’aménagement réalisez-vous ?',
-        a: "Création de massifs et de pelouses, plantation d'arbres et de haies, terrasses, allées, clôtures et brise-vue, arrosage automatique. Nous nous occupons de la préparation du terrain jusqu'à la finition.",
+        q: 'Quels travaux réalisez-vous à cette distance ?',
+        a: "Les chantiers d'aménagement extérieur : création de jardin, terrassement, terrasses, pavage et allées, plantations d'arbres, de haies et de massifs, engazonnement. Nous ne proposons pas d'entretien régulier (tonte, taille) aussi loin de notre base.",
       },
       {
-        q: "Le crédit d'impôt de 50 % s'applique-t-il ?",
-        a: "Oui pour l'entretien courant du jardin (tonte, taille, désherbage, ramassage des feuilles). Les travaux d'aménagement n'y ouvrent pas droit.",
+        q: "Ces travaux ouvrent-ils droit au crédit d'impôt de 50 % ?",
+        a: "Non. Le crédit d'impôt des services à la personne ne concerne que l'entretien courant du jardin. Les travaux de création et d'aménagement n'y ouvrent pas droit, mais le devis est gratuit et détaillé poste par poste.",
       },
     ],
   },

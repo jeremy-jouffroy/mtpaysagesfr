@@ -23,20 +23,22 @@ const cityServices = city.services.map((slug) => {
   if (!s) throw new Error(`Service inconnu pour ${city.name} : ${slug}`);
   return s;
 });
+// Au-delà du rayon d'entretien : uniquement des chantiers d'aménagement (pas d'entretien, pas de crédit d'impôt).
+const worksOnly = km > site.radiusKm;
 const others = cities.filter((c) => c.sector === city.sector && c.name !== city.name);
 
-const title = `Jardinier paysagiste à ${city.name}`;
+const title = worksOnly ? `Paysagiste à ${city.name} : création et aménagement` : `Jardinier paysagiste à ${city.name}`;
 const jsonLd = {
   '@type': 'Service',
   name: title,
-  serviceType: 'Entretien de jardin et aménagement paysager',
+  serviceType: worksOnly ? 'Aménagement paysager et travaux extérieurs' : 'Entretien de jardin et aménagement paysager',
   provider: { '@id': new URL(url('/'), Astro.site).href + '#entreprise' },
   areaServed: { '@type': 'City', name: city.name, containedInPlace: { '@type': 'AdministrativeArea', name: 'Côte-d’Or' } },
 };
 ---
 <Base title={title} description={city.description} faq={city.faq} jsonLd={jsonLd}>
   <PageHero title={title} lead={city.intro} crumbs={[{ label: 'Zone d’intervention', href: 'zone-intervention/' }]}>
-    {site.sap.enabled && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
+    {site.sap.enabled && !worksOnly && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
   </PageHero>
 
   <section class="section">
@@ -49,15 +51,19 @@ const jsonLd = {
 
   <section class="section section--alt">
     <div class="container">
-      <h2>Nos services les plus demandés à {city.name}</h2>
+      <h2>{worksOnly ? `Nos travaux d’aménagement à ${city.name}` : `Nos services les plus demandés à ${city.name}`}</h2>
       <div class="grid grid-3">
         {cityServices.map((s) => <ServiceCard service={s} />)}
       </div>
-      <p style="margin-top:1.5rem">
-        <a href={url('entretien-jardin/')}>Tous nos services d’entretien</a> ·
-        <a href={url('creation-amenagement/')}>Création et aménagement</a> ·
-        <a href={url('contrats-entretien/')}>Contrats d’entretien</a>
-      </p>
+      {worksOnly ? (
+        <p style="margin-top:1.5rem"><a href={url('creation-amenagement/')}>Tous nos travaux de création et d’aménagement →</a></p>
+      ) : (
+        <p style="margin-top:1.5rem">
+          <a href={url('entretien-jardin/')}>Tous nos services d’entretien</a> ·
+          <a href={url('creation-amenagement/')}>Création et aménagement</a> ·
+          <a href={url('contrats-entretien/')}>Contrats d’entretien</a>
+        </p>
+      )}
     </div>
   </section>
 
@@ -111,5 +117,5 @@ const jsonLd = {
     </div>
   </section>
 
-  <CtaBand title={`Un jardin à entretenir à ${city.name} ?`} />
+  <CtaBand title={worksOnly ? `Un projet d’aménagement à ${city.name} ?` : `Un jardin à entretenir à ${city.name} ?`} />
 </Base>
