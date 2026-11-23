@@ -3,48 +3,111 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
 import { services } from '../data/services';
-import { ph, slugify } from '../scripts/utils';
+import { cities, type City } from '../data/cities';
+import { url, img, imgAlt, slugify } from '../scripts/utils';
 
 export function getStaticPaths() {
-  return site.cityPages.map((city) => ({ params: { ville: slugify(city.name) }, props: { city } }));
+  return cities.map((city) => ({ params: { ville: slugify(city.name) }, props: { city } }));
 }
-const { city } = Astro.props as { city: (typeof site.cityPages)[number] };
+const { city } = Astro.props as { city: City };
+
+const km = site.communes.find((c) => c.name === city.name)?.km;
+if (km === undefined) throw new Error(`Commune absente de site.communes : ${city.name}`);
+
+const cityServices = city.services.map((slug) => {
+  const s = services.find((x) => x.slug === slug);
+  if (!s) throw new Error(`Service inconnu pour ${city.name} : ${slug}`);
+  return s;
+});
+const others = cities.filter((c) => c.name !== city.name);
+
+const title = `Jardinier paysagiste à ${city.name}`;
+const jsonLd = {
+  '@type': 'Service',
+  name: title,
+  serviceType: 'Entretien de jardin et aménagement paysager',
+  provider: { '@id': new URL(url('/'), Astro.site).href + '#entreprise' },
+  areaServed: { '@type': 'City', name: city.name, containedInPlace: { '@type': 'AdministrativeArea', name: 'Côte-d’Or' } },
+};
 ---
-<Base
-  title={`Jardinier paysagiste à ${city.name}`}
-  description={`Jardinier paysagiste à ${city.name} : entretien de jardin, taille de haies, création d'espaces verts. ${site.sap.enabled ? "50 % de crédit d'impôt. " : ''}Devis gratuit.`}
->
-  <PageHero title={`Jardinier paysagiste à ${city.name}`} lead={city.intro} crumbs={[{ label: 'Zone d’intervention', href: 'zone-intervention/' }]}>
+<Base title={title} description={city.description} faq={city.faq} jsonLd={jsonLd}>
+  <PageHero title={title} lead={city.intro} crumbs={[{ label: 'Zone d’intervention', href: 'zone-intervention/' }]}>
     {site.sap.enabled && <span slot="badge" class="badge" style="margin-bottom:1rem">-50 % de crédit d’impôt</span>}
   </PageHero>
 
   <section class="section">
     <div class="container">
-      <h2>Nos chantiers à {city.name}</h2>
-      <p class="placeholder-note">TODO : ajouter 2 ou 3 chantiers réels réalisés dans cette commune. C’est ce qui rend la page utile et lui permet d’être bien référencée.</p>
-      <div class="gallery" style="margin-top:1.5rem">
-        <figure><img src={ph(`Chantier à ${city.name} n° 1`, 600, 450)} alt={`Chantier à ${city.name}`} loading="lazy" width="600" height="450" /></figure>
-        <figure><img src={ph(`Chantier à ${city.name} n° 2`, 600, 450)} alt={`Chantier à ${city.name}`} loading="lazy" width="600" height="450" /></figure>
-      </div>
+      <h2>{city.context.title}</h2>
+      {city.context.paragraphs.map((p) => <p>{p}</p>)}
+      <p class="muted small">📍 {city.name} est à environ {km} km de notre base de {site.address.city}.</p>
     </div>
   </section>
 
   <section class="section section--alt">
     <div class="container">
-      <h2>Nos services à {city.name}</h2>
+      <h2>Nos services les plus demandés à {city.name}</h2>
       <div class="grid grid-3">
-        {services.filter((s) => s.category === 'entretien').slice(0, 3).map((s) => <ServiceCard service={s} />)}
+        {cityServices.map((s) => <ServiceCard service={s} />)}
       </div>
+      <p style="margin-top:1.5rem">
+        <a href={url('entretien-jardin/')}>Tous nos services d’entretien</a> ·
+        <a href={url('creation-amenagement/')}>Création et aménagement</a> ·
+        <a href={url('contrats-entretien/')}>Contrats d’entretien</a>
+      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <h2>Avis de clients à {city.name}</h2>
-      <Reviews count={2} />
+      {city.projects.length > 0 ? (
+        <>
+          <h2>Nos chantiers à {city.name}</h2>
+          <div class="gallery" style="margin-top:1.5rem">
+            {city.projects.map((p) => (
+              <figure>
+                <img src={img(p.photo, 600, 600)} alt={imgAlt(p.photo)} loading="lazy" width="600" height="600" />
+                <figcaption><strong>{p.title}</strong><br />{p.text}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <h2>Quelques réalisations MT Paysages</h2>
+          <div class="gallery" style="margin-top:1.5rem">
+            {city.gallery.map((p) => (
+              <figure>
+                <img src={img(p, 600, 600)} alt={imgAlt(p)} loading="lazy" width="600" height="600" />
+                <figcaption>{imgAlt(p)}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </>
+      )}
+      <p style="margin-top:1.5rem"><a href={url('realisations/')}>Voir toutes nos réalisations →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2>Ce que disent nos clients</h2>
+      <Reviews count={3} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Questions fréquentes à {city.name}</h2>
+      <Faq items={city.faq} />
+      <p class="muted" style="margin-top:1.5rem">
+        Nous intervenons aussi à {others.map((c, i) => (
+          <>{i > 0 && ', '}<a href={url(`jardinier-${slugify(c.name)}/`)}>{c.name}</a></>
+        ))}, ainsi que dans <a href={url('zone-intervention/')}>toutes les communes à {site.radiusKm} km de {site.address.city}</a>.
+      </p>
     </div>
   </section>
 

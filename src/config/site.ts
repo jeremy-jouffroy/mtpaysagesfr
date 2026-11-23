@@ -19,8 +19,8 @@ export const site = {
     region: 'Bourgogne-Franche-Comté',
     geo: { latitude: 47.221078, longitude: 5.066707 }, // siège, source : registre des entreprises
   },
-  hours: 'Lundi et mardi : 8h – 18h',
-  openingHoursSpec: ['Mo-Tu 08:00-18:00'],
+  hours: 'Lundi et vendredi : 8h – 18h',
+  openingHoursSpec: ['Mo,Fr 08:00-18:00'],
   yearsExperience: '3',
   gardensMaintained: '187',
 
@@ -83,10 +83,7 @@ export const site = {
     { name: 'Magny-lès-Villers', km: 20 }, { name: 'Binges', km: 20 }, { name: 'Bagnot', km: 20 },
     { name: 'Sainte-Marie-sur-Ouche', km: 20 }, { name: 'Norges-la-Ville', km: 20 }, { name: 'Prenois', km: 20 },
   ],
-  // Communes qui ont leur propre page « jardinier-[commune] ». N'en créer que si vous avez
-  // du contenu réel à y mettre (chantiers, photos, avis locaux) : des pages identiques nuisent au référencement.
-  // Ex. : { name: 'Gevrey-Chambertin', intro: '2–3 phrases propres à cette commune : chantiers, type de jardins…' }
-  cityPages: [] as { name: string; intro: string }[],
+  // Les pages « jardinier-[commune] » sont définies dans src/data/cities.ts.
 
   // Services à la personne : passer à false si l'entreprise n'est pas déclarée SAP
   sap: {

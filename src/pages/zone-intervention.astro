@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../config/site';
 import { url, slugify } from '../scripts/utils';
+import { cities } from '../data/cities';
 
 const bands = [5, 10, 15, 20].map((max, i, all) => ({
   label: i === 0 ? `Moins de ${max} km` : `De ${all[i - 1]} à ${max} km`,
@@ -24,11 +25,11 @@ const bands = [5, 10, 15, 20].map((max, i, all) => ({
             </ul>
           </>
         ))}
-        {site.cityPages.length > 0 && (
+        {cities.length > 0 && (
           <>
             <h3 style="margin-top:2rem">Pages par commune</h3>
             <ul>
-              {site.cityPages.map((c) => <li><a href={url(`jardinier-${slugify(c.name)}/`)}>Jardinier paysagiste à {c.name}</a></li>)}
+              {cities.map((c) => <li><a href={url(`jardinier-${slugify(c.name)}/`)}>Jardinier paysagiste à {c.name}</a></li>)}
             </ul>
           </>
         )}
