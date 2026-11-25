@@ -180,7 +180,7 @@ export const cities: City[] = [
       },
       {
         q: "Combien coûte réellement l'entretien après crédit d'impôt ?",
-        a: "Le crédit d'impôt couvre 50 % des sommes payées pour l'entretien courant du jardin, dans la limite de 5 000 € de dépenses par an et par foyer. Avec l'avance immédiate, la réduction est déduite directement de la facture.",
+        a: "Le crédit d'impôt couvre 50 % des sommes payées pour l'entretien courant du jardin, dans la limite de 5 000 € de dépenses par an et par foyer. MT Paysages pratique l'avance immédiate : la réduction est déduite directement de la facture.",
       },
     ],
   },
@@ -432,7 +432,7 @@ export const cities: City[] = [
       },
       {
         q: "Le crédit d'impôt de 50 % s'applique-t-il ?",
-        a: "Oui, sur l'entretien courant du jardin, au titre des services à la personne, dans la limite de 5 000 € de dépenses par an et par foyer. Avec l'avance immédiate, il est déduit directement de la facture.",
+        a: "Oui, sur l'entretien courant du jardin, au titre des services à la personne, dans la limite de 5 000 € de dépenses par an et par foyer. MT Paysages pratique l'avance immédiate : il est déduit directement de la facture.",
       },
     ],
   },
@@ -720,7 +720,7 @@ export const cities: City[] = [
       },
       {
         q: "Comment fonctionne l'avance immédiate du crédit d'impôt ?",
-        a: "Avec l'avance immédiate de l'URSSAF, vous ne payez que 50 % de la facture d'entretien : la part du crédit d'impôt est déduite directement, sans attendre la déclaration de revenus.",
+        a: "MT Paysages pratique l'avance immédiate de l'URSSAF : vous ne payez que 50 % de la facture d'entretien : la part du crédit d'impôt est déduite directement, sans attendre la déclaration de revenus.",
       },
     ],
   },

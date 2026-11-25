@@ -14,7 +14,7 @@ const faq = [
   },
   {
     q: 'Quelles prestations ouvrent droit au crédit d’impôt ?',
-    a: 'Les petits travaux de jardinage : tonte, taille de haies et d’arbustes, désherbage, ramassage des feuilles, débroussaillage. La création d’un jardin, les terrasses ou les clôtures n’y ouvrent pas droit.',
+    a: 'Les petits travaux de jardinage : tonte, taille de haies et d’arbustes, désherbage, ramassage des feuilles, débroussaillage. La création d’un jardin, les terrasses ou les clôtures n’y ouvrent pas droit. Nous pratiquons l’avance immédiate : les 50 % sont déduits directement de la facture.',
   },
   {
     q: 'Dans quelles communes intervenez-vous ?',
@@ -35,7 +35,7 @@ const farCities = cities.filter((c) => !listed.has(c.name)).sort((a, b) => cityK
   <section class="hero" data-cta-location="hero">
     <div class="container hero-grid">
       <div>
-        {site.sap.enabled && <p><span class="badge">-50 % de crédit d’impôt sur l’entretien</span></p>}
+        {site.sap.enabled && <p><span class="badge">-50 % de crédit d’impôt sur l’entretien{site.sap.avanceImmediate && ', déduit immédiatement'}</span></p>}
         <h1>Jardinier paysagiste à {site.address.city} et alentours</h1>
         <p class="lead">
           Entretien régulier, taille de haies, création de massifs ou de terrasses : nous prenons soin de votre jardin
@@ -136,7 +136,7 @@ const farCities = cities.filter((c) => !listed.has(c.name)).sort((a, b) => cityK
       <ol class="steps">
         <li><h3>Vous nous contactez</h3><p class="muted small">Par le formulaire, par téléphone ou par email, en décrivant votre besoin.</p></li>
         <li><h3>Visite gratuite</h3><p class="muted small">Nous passons voir votre jardin pour évaluer précisément le travail.</p></li>
-        <li><h3>Devis sous 48 h</h3><p class="muted small">Un devis clair et détaillé, avec le montant après crédit d’impôt.</p></li>
+        <li><h3>Devis sous 48 h</h3><p class="muted small">Un devis clair et détaillé, avec le montant après crédit d’impôt{site.sap.avanceImmediate && ', le seul que vous réglez grâce à l’avance immédiate'}.</p></li>
         <li><h3>Intervention</h3><p class="muted small">Nous intervenons à la date convenue et laissons votre jardin propre.</p></li>
       </ol>
     </div>
