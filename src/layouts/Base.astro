@@ -87,17 +87,33 @@ const gtmSrc = import.meta.env.BASE_URL === '/' && site.gtmGatewayPath
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <script is:inline define:vars={{ pageType, gtmId: site.gtmId, gtmSrc }}>
+    <script is:inline define:vars={{ pageType, gtmId: site.gtmId, gtmSrc, axeptioClientId: site.axeptioClientId, axeptioCookiesVersion: site.axeptioCookiesVersion }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
+      window.gtag = gtag; // global : Axeptio l'appelle pour mettre à jour le consentement
       // Consent Mode v2 : tout est refusé par défaut, en attendant une bannière de consentement (CMP).
-      gtag('consent', 'default', {
+      var consentDefault = {
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         analytics_storage: 'denied',
         wait_for_update: 500,
-      });
+      };
+      gtag('consent', 'default', consentDefault);
+      // Bannière de consentement Axeptio (envoie gtag('consent', 'update', …) au choix du visiteur).
+      if (axeptioClientId) {
+        window.axeptioSettings = {
+          clientId: axeptioClientId,
+          cookiesVersion: axeptioCookiesVersion,
+          googleConsentMode: { default: consentDefault },
+        };
+        (function (d, s) {
+          var t = d.getElementsByTagName(s)[0], e = d.createElement(s);
+          e.async = true;
+          e.src = 'https://static.axept.io/sdk.js';
+          t.parentNode.insertBefore(e, t);
+        })(document, 'script');
+      }
       dataLayer.push({ event: 'page_view', page_type: pageType, page_path: location.pathname, page_title: document.title });
       if (gtmId) {
         (function (w, d, s, l, i) {

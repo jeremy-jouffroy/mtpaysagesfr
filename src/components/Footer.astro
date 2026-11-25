@@ -67,6 +67,7 @@ import { featuredCities, cityPath } from '../data/cities';
         <li><a href={url('mentions-legales/')}>Mentions légales</a></li>
         <li><a href={url('confidentialite/')}>Confidentialité</a></li>
         <li><a href={url('cgv/')}>CGV</a></li>
+        {site.axeptioClientId && <li><button type="button" class="link-button" onclick="window.openAxeptioCookies && window.openAxeptioCookies()">Gérer les cookies</button></li>}
       </ul>
     </div>
   </div>

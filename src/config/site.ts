@@ -116,6 +116,11 @@ export const site = {
   // perso (BASE_PATH=/) ; sur github.io le tag est chargé depuis googletagmanager.com.
   gtmGatewayPath: '/n5mx',
 
+  // Bannière de consentement Axeptio (laisser vide pour désactiver). Activer « Google Consent Mode v2 »
+  // dans le back-office Axeptio pour qu'il envoie la mise à jour du consentement.
+  axeptioClientId: '6b0711897293b368bd058e1a',
+  axeptioCookiesVersion: 'fr-at-gpdr-25-11-2026', // version de la configuration publiée dans Axeptio
+
   // Formulaire : clé Web3Forms (gratuite sur https://web3forms.com, liée à l'email de réception).
   // Cette clé n'est pas secrète : elle peut figurer dans le code public.
   web3formsKey: 'e1c752e4-8b67-4131-86c4-25c5ea9f5726',

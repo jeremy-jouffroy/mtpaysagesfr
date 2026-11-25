@@ -34,6 +34,12 @@ import { site } from '../config/site';
     Ce site utilise Google Tag Manager pour gérer d’éventuels outils de mesure d’audience. Aucun cookie de mesure
     d’audience ou de publicité n’est déposé sans votre consentement préalable.
   </p>
+  {site.axeptioClientId && (
+    <p>
+      Vos choix sont recueillis par la bannière Axeptio. Vous pouvez les modifier à tout moment :
+      <button type="button" class="link-button" onclick="window.openAxeptioCookies && window.openAxeptioCookies()">gérer les cookies</button>.
+    </p>
+  )}
   <p>
     L’hébergeur (GitHub) peut enregistrer des journaux techniques (adresse IP) pour assurer la sécurité du service.
     Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité de GitHub</a>.
