@@ -89,7 +89,7 @@ export const site = {
   sap: {
     enabled: true,
     number: '[SAP000000000]', // TODO : numéro de déclaration NOVA
-    avanceImmediate: true, // l'entreprise propose-t-elle l'avance immédiate URSSAF ?
+    avanceImmediate: true, // MT Paysages pratique l'avance immédiate URSSAF
   },
 
   // Informations légales
@@ -112,6 +112,9 @@ export const site = {
 
   // Google Tag Manager (laisser vide pour désactiver). Le dataLayer est documenté dans le README.
   gtmId: 'GTM-T9QZ2VVP',
+  // Google tag gateway (Cloudflare) : chemin de mesure first-party. Utilisé seulement sur le domaine
+  // perso (BASE_PATH=/) ; sur github.io le tag est chargé depuis googletagmanager.com.
+  gtmGatewayPath: '/n5mx',
 
   // Formulaire : clé Web3Forms (gratuite sur https://web3forms.com, liée à l'email de réception).
   // Cette clé n'est pas secrète : elle peut figurer dans le code public.
