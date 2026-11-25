@@ -76,6 +76,10 @@ const faqSchema = faq?.length
       mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
     }
   : null;
+// Avec le Google tag gateway, gtm.js est servi par notre domaine (first-party).
+const gtmSrc = import.meta.env.BASE_URL === '/' && site.gtmGatewayPath
+  ? `${site.gtmGatewayPath}/?id=`
+  : 'https://www.googletagmanager.com/gtm.js?id=';
 ---
 <!doctype html>
 <html lang="fr">
@@ -83,7 +87,7 @@ const faqSchema = faq?.length
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
-    <script is:inline define:vars={{ pageType, gtmId: site.gtmId }}>
+    <script is:inline define:vars={{ pageType, gtmId: site.gtmId, gtmSrc }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       // Consent Mode v2 : tout est refusé par défaut, en attendant une bannière de consentement (CMP).
@@ -101,7 +105,7 @@ const faqSchema = faq?.length
           w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
           var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
           j.async = true;
-          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          j.src = gtmSrc + i + dl;
           f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', gtmId);
       }
