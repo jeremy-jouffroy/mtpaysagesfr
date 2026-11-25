@@ -101,7 +101,7 @@ export const site = {
     registry: 'RCS Dijon 978 977 866',
     vat: 'FR08978977866',
     director: 'Thomas Michon',
-    insurer: '[Nom de l’assureur – RC Pro / décennale]',
+    insurer: 'MMA IARD Assurances Mutuelles – MMA IARD SA, contrat MMA PRO-PME n° 148885868',
     mediator: { name: '[Nom du médiateur de la consommation]', url: '#' },
   },
   host: {
